@@ -92,7 +92,7 @@ export const projects: Project[] = [
     tags: ["C#", ".NET 8", "gRPC", "Kafka", "Docker", "AKS"],
     links: [
       { label: "Backend", href: "https://github.com/ritsth/Jobbie_Backend" },
-      { label: "Frontend", href: "https://github.com/ritsth/Jobbie_Frontend" },
+      { label: "Frontend", href: "https://github.com/AdvancedUno/Jobbie_Frontend" },
     ],
     featured: true,
     theme: {
@@ -158,7 +158,7 @@ export const projects: Project[] = [
     blurb:
       "An Arduino-powered robot that walks and dances — coordinating multiple sensors and servo motors with embedded C++.",
     tags: ["Arduino", "C++", "Robotics", "Sensors"],
-    links: [],
+    links: [{ label: "Repo", href: "https://github.com/ritsth/Dancing-Robo" }],
     theme: {
       gradient: "from-orange-500 via-red-700 to-zinc-900",
       icon: "robot",

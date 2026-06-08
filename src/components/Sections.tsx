@@ -1,13 +1,8 @@
 import { experience, skills, profile } from "@/lib/data";
-import {
-  ArrowIcon,
-  FileIcon,
-  GitHubIcon,
-  LinkedInIcon,
-  MailIcon,
-} from "./Icons";
+import { ArrowIcon, FileIcon, GitHubIcon, LinkedInIcon } from "./Icons";
 import { TechIcon } from "@/lib/techIcons";
 import Reveal from "./Reveal";
+import CopyEmailCard from "./CopyEmailCard";
 
 function Tag({ children }: { children: React.ReactNode }) {
   return (
@@ -126,12 +121,6 @@ export function Skills() {
 export function Contact() {
   const cards = [
     {
-      label: "Email",
-      value: profile.email,
-      href: `mailto:${profile.email}`,
-      icon: <MailIcon className="h-5 w-5" />,
-    },
-    {
       label: "GitHub",
       value: "@ritsth",
       href: profile.socials.github,
@@ -162,6 +151,7 @@ export function Contact() {
             is email — or grab my résumé below.
           </p>
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
+            <CopyEmailCard email={profile.email} />
             {cards.map((c) => (
               <a
                 key={c.label}
