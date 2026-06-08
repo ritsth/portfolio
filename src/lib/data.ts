@@ -68,7 +68,13 @@ export const experience: Experience[] = [
   },
 ];
 
-export type ProjectIcon = "briefcase" | "flavor" | "leaf" | "fashion" | "robot";
+export type ProjectIcon =
+  | "briefcase"
+  | "flavor"
+  | "leaf"
+  | "fashion"
+  | "robot"
+  | "cart";
 
 export type Project = {
   name: string;
@@ -85,6 +91,25 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    name: "Blueberry Mart",
+    blurb:
+      "A full-stack grocery commerce app with role-based access, real-time inventory analytics, tiered memberships, and eSewa payments — backend on Google Cloud Run, admin portal on Firebase.",
+    tags: [".NET 8", "React Native", "PostgreSQL", "Kafka", "BigQuery", "GCP"],
+    links: [
+      { label: "Repo", href: "https://github.com/ritsth/Blueberry-Mart-app" },
+    ],
+    featured: true,
+    theme: {
+      gradient: "from-emerald-500 via-green-700 to-slate-900",
+      icon: "cart",
+      collage: [
+        "/projects/blueberry1.jpg",
+        "/projects/blueberry2.jpg",
+        "/projects/blueberry3.jpg",
+      ],
+    },
+  },
   {
     name: "Jobbie",
     blurb:

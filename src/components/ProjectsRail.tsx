@@ -54,6 +54,14 @@ function PosterIcon({ icon, className }: { icon: ProjectIcon; className?: string
           <path d="M9 13v1.5M15 13v1.5M9.5 17h5M2 13v3M22 13v3" />
         </svg>
       );
+    case "cart": // Blueberry Mart — grocery commerce
+      return (
+        <svg {...common}>
+          <circle cx="9" cy="20" r="1.5" />
+          <circle cx="18" cy="20" r="1.5" />
+          <path d="M2 3h2.2l2.4 12.4a1.5 1.5 0 0 0 1.5 1.2h8.6a1.5 1.5 0 0 0 1.5-1.2L21 7H5" />
+        </svg>
+      );
   }
 }
 
