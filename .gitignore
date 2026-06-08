@@ -24,6 +24,11 @@
 .DS_Store
 *.pem
 
+# private source documents (keep out of the repo / public site)
+# the deploy-ready resume lives in /public instead
+/Ritika Shrestha Resume*.pdf
+/Things I did.pdf
+
 # debug
 npm-debug.log*
 yarn-debug.log*

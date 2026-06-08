@@ -1,26 +1,92 @@
 @import "tailwindcss";
 
+/* Class-based dark mode toggle */
+@custom-variant dark (&:where(.dark, .dark *));
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --background: #fbfbfa;
+  --foreground: #1a1a1a;
+  --muted: #6b7280;
+  --card: #ffffff;
+  --border: #e7e7e4;
+  --accent: #0d9488;
+  --accent-soft: rgba(13, 148, 136, 0.1);
+}
+
+.dark {
+  --background: #0b0f10;
+  --foreground: #e6edf3;
+  --muted: #8b98a5;
+  --card: #11171a;
+  --border: #1e272c;
+  --accent: #5eead4;
+  --accent-soft: rgba(94, 234, 212, 0.1);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-muted: var(--muted);
+  --color-card: var(--card);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-soft: var(--accent-soft);
+  --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-mono), ui-monospace, monospace;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Subtle radial glow behind the page */
+.bg-glow {
+  background-image: radial-gradient(
+    600px circle at 0% 0%,
+    var(--accent-soft),
+    transparent 40%
+  );
+}
+
+/* Scroll-reveal animation */
+@keyframes reveal {
+  from {
+    opacity: 0;
+    transform: translateY(16px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.reveal {
+  opacity: 0;
+}
+
+.reveal.in-view {
+  animation: reveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .reveal,
+  .reveal.in-view {
+    opacity: 1;
+    animation: none;
+  }
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--background);
 }
