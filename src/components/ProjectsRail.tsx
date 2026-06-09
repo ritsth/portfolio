@@ -153,6 +153,15 @@ export default function ProjectsRail() {
             {/* readability tint — darkens on hover so details stay legible */}
             <div className="absolute inset-0 bg-black/25 transition-colors duration-300 group-hover:bg-black/60" />
 
+            {/* whole-card click → primary project link (stretched-link overlay) */}
+            <a
+              href={p.links[0].href}
+              target="_blank"
+              rel="noreferrer"
+              aria-label={`${p.name} — open ${p.links[0].label.toLowerCase()}`}
+              className="absolute inset-0 z-20"
+            />
+
             {/* domain watermark icon (only when there's no photo) */}
             {!p.theme.image && !p.theme.collage && (
               <PosterIcon
@@ -190,8 +199,14 @@ export default function ProjectsRail() {
                   <p className="text-[13px] leading-relaxed text-white/85">
                     {p.blurb}
                   </p>
-                  <div className="mt-3 flex flex-wrap gap-3">
-                    {p.links.map((l) => (
+                  <div className="relative z-30 mt-3 flex flex-wrap items-center gap-3">
+                    {/* primary link label — the whole card opens this */}
+                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-white">
+                      {p.links[0].label}
+                      <ArrowIcon className="h-3.5 w-3.5" />
+                    </span>
+                    {/* any additional links stay individually clickable */}
+                    {p.links.slice(1).map((l) => (
                       <a
                         key={l.href}
                         href={l.href}
@@ -211,7 +226,7 @@ export default function ProjectsRail() {
         ))}
       </div>
       <p className="mt-2 px-2 font-mono text-[11px] text-muted">
-        ← scroll · hover a card for details
+        ← scroll · hover for details · click to open
       </p>
     </section>
   );

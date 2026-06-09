@@ -27,13 +27,20 @@ export function About() {
       <div className="space-y-4 text-[15px] leading-relaxed text-muted">
         <p>{profile.intro}</p>
         <p>
-          Lately I&apos;ve been building{" "}
-          <span className="font-medium text-foreground">LLM-powered tools</span>{" "}
-          and{" "}
+          For the last three years, I have also been working as a junior
+          software engineer at{" "}
           <span className="font-medium text-foreground">
-            microservice backends
-          </span>{" "}
-          — and exploring where machine learning meets real products.
+            Denison Web Services
+          </span>
+          , where I upgrade and maintain the university&apos;s official website
+          using Drupal, a web content management system.
+        </p>
+        <p>
+          Additionally, I have worked on multiple projects with my colleagues
+          and friends. Most recently, I worked on developing{" "}
+          <span className="font-medium text-foreground">Blueberry Mart</span>, a
+          full-stack grocery commerce app with role-based access, real-time
+          inventory analytics, and integrated eSewa payments.
         </p>
       </div>
     </section>
@@ -56,9 +63,16 @@ export function Experience() {
                   {job.role}
                   <span className="text-muted"> · {job.company}</span>
                 </h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted">
-                  {job.blurb}
-                </p>
+                <ul className="mt-2 space-y-1.5">
+                  {job.bullets.map((b) => (
+                    <li
+                      key={b}
+                      className="relative pl-4 text-sm leading-relaxed text-muted before:absolute before:left-0 before:top-2 before:h-1 before:w-1 before:rounded-full before:bg-accent"
+                    >
+                      {b}
+                    </li>
+                  ))}
+                </ul>
                 <ul className="mt-3 flex flex-wrap gap-2">
                   {job.tags.map((t) => (
                     <li key={t}>
