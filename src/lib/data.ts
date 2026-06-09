@@ -103,7 +103,7 @@ export const projects: Project[] = [
     name: "Blueberry Mart",
     blurb:
       "A full-stack grocery commerce app with role-based access, real-time inventory analytics, tiered memberships, and eSewa payments — backend on Google Cloud Run, admin portal on Firebase.",
-    tags: [".NET 8", "React Native", "PostgreSQL", "Kafka", "BigQuery", "GCP"],
+    tags: [".NET 8", "React Native", "GCP", "BigQuery", "PostgreSQL", "Kafka"],
     links: [
       { label: "Repo", href: "https://github.com/ritsth/Blueberry-Mart-app" },
     ],
