@@ -45,22 +45,6 @@ export function About() {
           experience sparked my interest in building automation solutions that
           improve efficiency and enhance the user experience.
         </p>
-        <p>
-          For the last three years, I have also been working as a junior
-          software engineer at{" "}
-          <span className="font-medium text-foreground">
-            Denison Web Services
-          </span>
-          , where I upgrade and maintain the university&apos;s official website
-          using Drupal, a web content management system.
-        </p>
-        <p>
-          Additionally, I have worked on multiple projects with my colleagues
-          and friends. Most recently, I worked on developing{" "}
-          <span className="font-medium text-foreground">Blueberry Mart</span>, a
-          full-stack grocery commerce app with role-based access, real-time
-          inventory analytics, and integrated eSewa payments.
-        </p>
       </div>
     </section>
   );
