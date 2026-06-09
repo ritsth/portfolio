@@ -25,7 +25,26 @@ export function About() {
     <section id="about" className="scroll-mt-24">
       <SectionHeading>About</SectionHeading>
       <div className="space-y-4 text-[15px] leading-relaxed text-muted">
-        <p>{profile.intro}</p>
+        <p>
+          Hi, I&apos;m Ritika — I just completed my bachelor&apos;s in Computer
+          Science and Mathematics at Denison University. Last summer, I interned
+          as a software engineer at{" "}
+          <span className="font-medium text-foreground">TransCore</span>, where I
+          worked with my team to build an AI-powered customer service chatbot. We
+          used large language models such as LLaMA, Mistral, and Qwen, combined
+          with retrieval-augmented generation, and deployed the system on Google
+          Cloud virtual machines to automate FAQ responses and toll-processing
+          inquiries.
+        </p>
+        <p>
+          Recently, as a{" "}
+          <span className="font-medium text-foreground">Cornell Tech fellow</span>
+          , I also worked on a project with{" "}
+          <span className="font-medium text-foreground">Nestlé</span> to identify
+          flavor trends among consumers and predict future market demands. This
+          experience sparked my interest in building automation solutions that
+          improve efficiency and enhance the user experience.
+        </p>
         <p>
           For the last three years, I have also been working as a junior
           software engineer at{" "}

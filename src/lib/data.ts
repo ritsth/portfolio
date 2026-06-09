@@ -6,7 +6,7 @@ export const profile = {
   title: "Software Engineer",
   tagline: "Building at the intersection of AI and full-stack engineering.",
   intro:
-    "CS & Math senior at Denison University ('26). I design and ship full-stack systems and AI products — from microservice backends to LLM-powered tools.",
+    "Software engineer and Denison University CS & Math graduate, building full-stack systems and AI products — from microservice backends to LLM-powered tools.",
   location: "Granville, OH",
   email: "shrest_r2@denison.edu",
   resume: "/Ritika-Shrestha-Resume.pdf",
@@ -58,7 +58,7 @@ export const experience: Experience[] = [
   {
     role: "Junior Software Engineer",
     company: "Denison IT Web Services",
-    period: "2022 — Present",
+    period: "2022 — 2026",
     bullets: [
       "Collaborate with a team to upgrade and maintain university's official website using Drupal, Vue.js, and Twig, and automate development workflow using CI/CD in GitLab",
       "Enhance website interface by implementing user-centric UX designs and developing custom modules to improve website search functionality, resulting in a 25% increase in user engagement",

@@ -39,6 +39,13 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Pointer cursor on anything clickable */
+button:not(:disabled),
+[role="button"]:not(:disabled),
+a[href] {
+  cursor: pointer;
+}
+
 body {
   background: var(--background);
   color: var(--foreground);
