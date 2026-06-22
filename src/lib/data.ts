@@ -27,6 +27,15 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
+    role: "Handshake AI Fellow",
+    company: "Handshake",
+    period: "Apr 2026 — Present",
+    bullets: [
+      "Architect and execute vibe-coding software projects from scratch via natural language, exercising high agency over a 5-phase GitHub workflow to define tasks, engineer evaluation rubrics, and benchmark four distinct AI models",
+    ],
+    tags: ["AI", "LLMs", "Vibe Coding", "GitHub"],
+  },
+  {
     role: "AI Fellow",
     company: "Breakthrough Tech AI · Cornell Tech",
     period: "2025 — 2026",
@@ -82,7 +91,8 @@ export type ProjectIcon =
   | "leaf"
   | "fashion"
   | "robot"
-  | "cart";
+  | "cart"
+  | "puzzle";
 
 export type Project = {
   name: string;
@@ -116,6 +126,24 @@ export const projects: Project[] = [
         "/projects/blueberry2.jpg",
         "/projects/blueberry3.jpg",
       ],
+    },
+  },
+  {
+    name: "Little AI Helper",
+    blurb:
+      "An AI-powered Chrome extension that autofills job applications on Greenhouse, Lever, and Workday, drafts tailored answers and cover letters from your resume, and flags visa-sponsorship eligibility at a glance — powered by Gemini with a Cloud Run → Vertex AI managed proxy.",
+    tags: ["TypeScript", "React", "Vite", "Manifest V3", "Gemini", "Cloud Run"],
+    links: [
+      {
+        label: "Chrome Web Store",
+        href: "https://chromewebstore.google.com/detail/Little%20AI%20Helper/iibpijacaghdcckphindbaijjgcbaoll",
+      },
+      { label: "Repo", href: "https://github.com/ritsth/job-autofill-extension" },
+    ],
+    featured: true,
+    theme: {
+      gradient: "from-violet-500 via-purple-700 to-slate-900",
+      icon: "puzzle",
     },
   },
   {
