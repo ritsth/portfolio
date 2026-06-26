@@ -131,7 +131,7 @@ export const projects: Project[] = [
   {
     name: "Little AI Helper",
     blurb:
-      "An AI-powered Chrome extension that autofills job applications on Greenhouse, Lever, and Workday, drafts tailored answers and cover letters from your resume, and flags visa-sponsorship eligibility at a glance — powered by Gemini with a Cloud Run → Vertex AI managed proxy.",
+      "Built an AI-powered Chrome extension that autofills job applications, generates tailored answers and cover letters from your resume, and flags visa-sponsorship requirements — backed by Gemini and a Cloud Run → Vertex AI proxy.",
     tags: ["TypeScript", "React", "Vite", "Manifest V3", "Gemini", "Cloud Run"],
     links: [
       {
@@ -144,6 +144,7 @@ export const projects: Project[] = [
     theme: {
       gradient: "from-violet-500 via-purple-700 to-slate-900",
       icon: "puzzle",
+      image: "/projects/little-ai-helper.png",
     },
   },
   {
@@ -225,6 +226,74 @@ export const projects: Project[] = [
       icon: "robot",
       image: "/projects/robot.jpg",
     },
+  },
+];
+
+export type Involvement = {
+  role: string;
+  org: string;
+  period: string;
+  bullets: string[];
+};
+
+export const involvement: Involvement[] = [
+  {
+    role: "Chair of Cultural Events",
+    org: "Nepalese Student Association",
+    period: "Oct 2025 — Present",
+    bullets: [
+      "Designed and promoted a multi-faceted program featuring traditional dance, music, and cuisine, increasing campus engagement with Nepalese culture by 40% compared to prior years",
+    ],
+  },
+  {
+    role: "Member",
+    org: "Women in Math and Computer Science",
+    period: "Oct 2022 — Present",
+    bullets: [
+      "Fostered inclusivity and diversity within the STEM community by actively participating in club initiatives, promoting equal representation and support for underrepresented groups in math and computer science",
+    ],
+  },
+  {
+    role: "Member",
+    org: "Society of Women Engineers",
+    period: "Apr 2025 — Present",
+    bullets: [
+      "Participated in annual Society of Women Engineers conference, connecting with global engineering professionals, engaging in technical workshops, and exploring innovations across disciplines",
+    ],
+  },
+];
+
+export type Honor = {
+  name: string;
+  issuer: string;
+  since: string;
+  description?: string;
+};
+
+export const honors: Honor[] = [
+  {
+    name: "Pi Mu Epsilon",
+    issuer: "Denison University",
+    since: "Mar 2025",
+    description: "International Honor Society for Mathematics",
+  },
+  {
+    name: "Upsilon Pi Epsilon",
+    issuer: "Denison University",
+    since: "Feb 2025",
+    description: "Honorary Society for Computing & Information Disciplines",
+  },
+  {
+    name: "Forbes B. Wiley Award",
+    issuer: "Denison Mathematics Dept.",
+    since: "2025",
+    description: "Awarded for outstanding achievement in mathematics",
+  },
+  {
+    name: "Dean's List",
+    issuer: "Denison University",
+    since: "2022 — 2026",
+    description: "Maintained GPA of 3.79 / 4.00 throughout degree",
   },
 ];
 
