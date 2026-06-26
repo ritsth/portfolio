@@ -4,6 +4,7 @@ import {
   About,
   Experience,
   Skills,
+  Involvement,
   Contact,
   Footer,
 } from "@/components/Sections";
@@ -19,6 +20,7 @@ export default function Home() {
             <Experience />
             <ProjectsRail />
             <Skills />
+            <Involvement />
             <Contact />
             <Footer />
           </main>

@@ -1,4 +1,4 @@
-import { experience, skills, profile } from "@/lib/data";
+import { experience, skills, profile, involvement, honors } from "@/lib/data";
 import { ArrowIcon, FileIcon, GitHubIcon, LinkedInIcon } from "./Icons";
 import { TechIcon } from "@/lib/techIcons";
 import Reveal from "./Reveal";
@@ -131,6 +131,71 @@ export function Skills() {
           </Reveal>
         ))}
       </div>
+    </section>
+  );
+}
+
+export function Involvement() {
+  return (
+    <section id="involvement" className="mt-24 scroll-mt-24 lg:mt-36">
+      <SectionHeading>Involvement</SectionHeading>
+
+      {/* Clubs & orgs */}
+      <ol className="group/list space-y-3">
+        {involvement.map((item, i) => (
+          <Reveal as="li" key={item.role + item.org} delay={i * 60}>
+            <div className="group relative grid gap-3 rounded-lg p-4 transition-all hover:bg-card hover:shadow-sm sm:grid-cols-8 sm:gap-6 lg:-mx-4 lg:hover:border lg:hover:border-border">
+              <p className="mt-1 font-mono text-xs uppercase tracking-wide text-muted sm:col-span-2">
+                {item.period}
+              </p>
+              <div className="sm:col-span-6">
+                <h3 className="font-semibold text-foreground">
+                  {item.role}
+                  <span className="text-muted"> · {item.org}</span>
+                </h3>
+                <ul className="mt-2 space-y-1.5">
+                  {item.bullets.map((b) => (
+                    <li
+                      key={b}
+                      className="relative pl-4 text-sm leading-relaxed text-muted before:absolute before:left-0 before:top-2 before:h-1 before:w-1 before:rounded-full before:bg-accent"
+                    >
+                      {b}
+                    </li>
+                  ))}
+                </ul>
+              </div>
+            </div>
+          </Reveal>
+        ))}
+      </ol>
+
+      {/* Honors & awards */}
+      <Reveal delay={involvement.length * 60}>
+        <h3 className="mb-4 mt-10 font-mono text-xs uppercase tracking-widest text-accent">
+          Honors &amp; Awards
+        </h3>
+        <ul className="grid gap-3 sm:grid-cols-2">
+          {honors.map((h) => (
+            <li
+              key={h.name}
+              className="group flex flex-col gap-1 rounded-xl border border-border bg-card p-4 transition-all hover:-translate-y-0.5 hover:border-accent hover:shadow-sm"
+            >
+              <div className="flex items-start justify-between gap-2">
+                <span className="font-semibold text-foreground">{h.name}</span>
+                <span className="shrink-0 font-mono text-[10px] uppercase tracking-wide text-muted">
+                  {h.since}
+                </span>
+              </div>
+              <span className="text-xs text-accent">{h.issuer}</span>
+              {h.description && (
+                <span className="mt-0.5 text-xs leading-relaxed text-muted">
+                  {h.description}
+                </span>
+              )}
+            </li>
+          ))}
+        </ul>
+      </Reveal>
     </section>
   );
 }
