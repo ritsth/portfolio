@@ -1,8 +1,10 @@
 "use client";
 
-import { useRef } from "react";
-import { projects, type ProjectIcon } from "@/lib/data";
+import { useEffect, useRef, useState } from "react";
+import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { projects, type Project, type ProjectIcon } from "@/lib/data";
 import { ArrowIcon, ChevronIcon } from "./Icons";
+import ProjectDetail from "./ProjectDetail";
 
 // A large, subtle watermark icon that reflects each project's domain.
 function PosterIcon({ icon, className }: { icon: ProjectIcon; className?: string }) {
@@ -73,10 +75,27 @@ function PosterIcon({ icon, className }: { icon: ProjectIcon; className?: string
 
 export default function ProjectsRail() {
   const railRef = useRef<HTMLDivElement>(null);
+  const [active, setActive] = useState<Project | null>(null);
+  const reduce = useReducedMotion() ?? false;
 
   function scroll(dir: 1 | -1) {
     railRef.current?.scrollBy({ left: dir * 300, behavior: "smooth" });
   }
+
+  // Esc to close + lock body scroll while a case study is open.
+  useEffect(() => {
+    if (!active) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key === "Escape") setActive(null);
+    };
+    document.addEventListener("keydown", onKey);
+    const prevOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.body.style.overflow = prevOverflow;
+    };
+  }, [active]);
 
   return (
     <section id="projects" className="mt-24 scroll-mt-24 lg:mt-36">
@@ -107,9 +126,22 @@ export default function ProjectsRail() {
         className="-mx-2 flex snap-x snap-mandatory gap-4 overflow-x-auto px-2 py-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {projects.map((p, i) => (
-          <article
+          <motion.article
             key={p.name}
-            className="group relative h-72 w-[270px] shrink-0 snap-start overflow-hidden rounded-2xl border border-border shadow-sm transition-all duration-300 hover:z-10 hover:scale-[1.04] hover:border-accent hover:shadow-xl"
+            layoutId={reduce ? undefined : `project-${p.name}`}
+            whileHover={reduce ? undefined : { scale: 1.03 }}
+            transition={{ type: "spring", stiffness: 400, damping: 32 }}
+            onClick={() => setActive(p)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter" || e.key === " ") {
+                e.preventDefault();
+                setActive(p);
+              }
+            }}
+            role="button"
+            tabIndex={0}
+            aria-label={`${p.name} — open case study`}
+            className="group relative h-72 w-[270px] shrink-0 cursor-pointer snap-start overflow-hidden rounded-2xl border border-border shadow-sm transition-colors duration-300 hover:z-10 hover:border-accent hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
           >
             {/* base themed gradient (shows behind/while photos load) */}
             <div
@@ -159,15 +191,6 @@ export default function ProjectsRail() {
             {/* readability tint — darkens on hover so details stay legible */}
             <div className="absolute inset-0 bg-black/25 transition-colors duration-300 group-hover:bg-black/60" />
 
-            {/* whole-card click → primary project link (stretched-link overlay) */}
-            <a
-              href={p.links[0].href}
-              target="_blank"
-              rel="noreferrer"
-              aria-label={`${p.name} — open ${p.links[0].label.toLowerCase()}`}
-              className="absolute inset-0 z-20"
-            />
-
             {/* domain watermark icon (only when there's no photo) */}
             {!p.theme.image && !p.theme.collage && (
               <PosterIcon
@@ -205,35 +228,30 @@ export default function ProjectsRail() {
                   <p className="text-[13px] leading-relaxed text-white/85">
                     {p.blurb}
                   </p>
-                  <div className="relative z-30 mt-3 flex flex-wrap items-center gap-3">
-                    {/* primary link label — the whole card opens this */}
-                    <span className="inline-flex items-center gap-1 text-xs font-semibold text-white">
-                      {p.links[0].label}
-                      <ArrowIcon className="h-3.5 w-3.5" />
-                    </span>
-                    {/* any additional links stay individually clickable */}
-                    {p.links.slice(1).map((l) => (
-                      <a
-                        key={l.href}
-                        href={l.href}
-                        target="_blank"
-                        rel="noreferrer"
-                        className="inline-flex items-center gap-1 text-xs font-semibold text-white hover:text-accent"
-                      >
-                        {l.label}
-                        <ArrowIcon className="h-3.5 w-3.5" />
-                      </a>
-                    ))}
-                  </div>
+                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-white">
+                    View case study
+                    <ArrowIcon className="h-3.5 w-3.5" />
+                  </span>
                 </div>
               </div>
             </div>
-          </article>
+          </motion.article>
         ))}
       </div>
       <p className="mt-2 px-2 font-mono text-[11px] text-muted">
-        ← scroll · hover for details · click to open
+        ← scroll · click a project for the full case study
       </p>
+
+      <AnimatePresence>
+        {active && (
+          <ProjectDetail
+            key={active.name}
+            project={active}
+            reduce={reduce}
+            onClose={() => setActive(null)}
+          />
+        )}
+      </AnimatePresence>
     </section>
   );
 }
