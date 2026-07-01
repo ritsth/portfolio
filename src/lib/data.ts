@@ -94,6 +94,13 @@ export type ProjectIcon =
   | "cart"
   | "puzzle";
 
+export type ProjectMedia = {
+  src: string;
+  alt: string;
+  caption?: string;
+  kind?: "screenshot" | "diagram" | "photo";
+};
+
 export type Project = {
   name: string;
   blurb: string;
@@ -106,6 +113,15 @@ export type Project = {
     image?: string; // single background photo
     collage?: string[]; // Pinterest-style masonry of photos
   };
+  // Rich case-study fields (all optional) — surfaced in the full-screen detail view.
+  timeline?: string; // e.g. "2025 — Present"
+  role?: string; // e.g. "Solo full-stack"
+  problem?: string; // context / why it exists
+  overview?: string; // what was built (longer than blurb)
+  highlights?: string[]; // feature bullets
+  stack?: string[]; // full tech list (superset of tags)
+  impact?: { value: string; label: string }[]; // headline metrics
+  gallery?: ProjectMedia[]; // multiple images; falls back to theme.image/collage when absent
 };
 
 export const projects: Project[] = [
@@ -122,11 +138,84 @@ export const projects: Project[] = [
       gradient: "from-emerald-500 via-green-700 to-slate-900",
       icon: "cart",
       collage: [
-        "/projects/blueberry1.jpg",
-        "/projects/blueberry2.jpg",
-        "/projects/blueberry3.jpg",
+        "/projects/bbm-catalog.png",
+        "/projects/bbm-analytics-revenue.png",
+        "/projects/bbm-branches.png",
       ],
     },
+    timeline: "2026 — Present",
+    role: "Solo full-stack developer",
+    problem:
+      "Local grocery stores often lack an integrated system to manage inventory, memberships, and online orders — leaving owners juggling spreadsheets while customers miss out on a modern shopping experience.",
+    overview:
+      "A full-stack grocery commerce platform spanning a customer mobile app, an admin web portal, and a .NET 8 backend — with role-based access, automated database migrations, and a real-time analytics pipeline.",
+    highlights: [
+      "Role-based access across customer, staff, and shareholder roles with automated EF Core 8 migrations on PostgreSQL (Cloud SQL)",
+      "Real-time inventory analytics pipeline built on Kafka and BigQuery",
+      "eSewa payment integration, tiered memberships, and a self-service query builder for shareholders",
+      "Backend deployed to Google Cloud Run and admin portal to Firebase Hosting via GitHub Actions",
+    ],
+    stack: [
+      ".NET 8",
+      "React Native",
+      "Vite",
+      "PostgreSQL",
+      "Cloud SQL",
+      "Kafka",
+      "BigQuery",
+      "GCP",
+      "Cloud Run",
+      "Firebase",
+      "GitHub Actions",
+    ],
+    impact: [
+      { value: "3-in-1", label: "app · portal · API" },
+      { value: "Real-time", label: "inventory analytics" },
+    ],
+    gallery: [
+      {
+        src: "/projects/bbm-feature.png",
+        alt: "Blueberry Mart — Shop groceries. Earn rewards. Pay with eSewa.",
+        caption: "Blueberry Mart — a full-stack grocery commerce platform.",
+        kind: "photo",
+      },
+      {
+        src: "/projects/bbm-catalog.png",
+        alt: "Blueberry Mart storefront with best sellers and produce",
+        caption: "Customer storefront — browse a branch's catalog.",
+        kind: "screenshot",
+      },
+      {
+        src: "/projects/bbm-analytics-revenue.png",
+        alt: "Analytics dashboard showing total revenue and a 14-day trend",
+        caption: "Real-time revenue analytics dashboard.",
+        kind: "screenshot",
+      },
+      {
+        src: "/projects/bbm-analytics-items.png",
+        alt: "Top-selling items and pickup-vs-delivery breakdown",
+        caption: "Top sellers and pickup vs. delivery split.",
+        kind: "screenshot",
+      },
+      {
+        src: "/projects/bbm-branches.png",
+        alt: "Shop-by-branch selection screen",
+        caption: "Multi-branch shopping.",
+        kind: "screenshot",
+      },
+      {
+        src: "/projects/bbm-bulk.png",
+        alt: "Bulk orders for Blueberry Plus members",
+        caption: "Tiered membership unlocks bulk ordering.",
+        kind: "screenshot",
+      },
+      {
+        src: "/projects/bbm-assistant.png",
+        alt: "In-app shopping assistant",
+        caption: "AI shopping assistant.",
+        kind: "screenshot",
+      },
+    ],
   },
   {
     name: "Little AI Helper",
@@ -146,6 +235,59 @@ export const projects: Project[] = [
       icon: "puzzle",
       image: "/projects/little-ai-helper.png",
     },
+    timeline: "2025 — Present",
+    role: "Solo developer · published extension",
+    problem:
+      "Job seekers re-enter the same information across dozens of applications and agonize over open-ended questions and cover letters — a slow, repetitive grind, made worse when a role turns out to require visa sponsorship you don't have.",
+    overview:
+      "A published Chrome extension (Manifest V3) that autofills applications on Greenhouse, Lever, and Workday, drafts tailored answers and cover letters from your resume, and flags visa-sponsorship / eligibility requirements at a glance.",
+    highlights: [
+      "Autofills standard fields and drafts AI answers to open-ended questions on Greenhouse, Lever, and Workday",
+      "Generates downloadable cover letters from a template with company / role / date placeholders",
+      "Scans every page for visa-sponsorship, citizenship, and clearance language and shows a YES / NO eligibility badge",
+      "Pluggable AI layer: bring-your-own Gemini key, on-device model, or a managed Cloud Run → Vertex AI proxy with Google sign-in and per-user daily quotas",
+    ],
+    stack: [
+      "TypeScript",
+      "React",
+      "Vite",
+      "@crxjs/vite-plugin",
+      "Manifest V3",
+      "Gemini",
+      "Vertex AI",
+      "Cloud Run",
+      "Firestore",
+    ],
+    impact: [
+      { value: "Published", label: "on Chrome Web Store" },
+      { value: "3 boards", label: "Greenhouse · Lever · Workday" },
+    ],
+    gallery: [
+      {
+        src: "/projects/lah-panel.png",
+        alt: "Little AI Helper side panel open on a job posting",
+        caption: "Side panel: fill page, generate cover letter, tailored resume.",
+        kind: "screenshot",
+      },
+      {
+        src: "/projects/lah-autofill.png",
+        alt: "AI-drafted answers to open-ended application questions",
+        caption: "AI drafts answers to open-ended questions from your resume.",
+        kind: "screenshot",
+      },
+      {
+        src: "/projects/lah-badge.png",
+        alt: "Eligibility badge flagging visa-sponsorship on a job posting",
+        caption: "YES / NO eligibility badge on every job page.",
+        kind: "screenshot",
+      },
+      {
+        src: "/projects/lah-settings.png",
+        alt: "Little AI Helper settings and AI provider configuration",
+        caption: "Settings — pick your AI provider; data stays on device.",
+        kind: "screenshot",
+      },
+    ],
   },
   {
     name: "Jobbie",
@@ -162,6 +304,43 @@ export const projects: Project[] = [
       icon: "briefcase",
       image: "/projects/jobbie.jpg",
     },
+    timeline: "2024 — 2025",
+    role: "Backend engineer",
+    problem:
+      "Students hunting for internships bounce between scattered job boards with no single place tailored to campus recruiting.",
+    overview:
+      "A job-posting platform for students, built as five C#/.NET 8 microservices that communicate over gRPC, HTTP, and Kafka — containerized with Docker and deployed on Azure Kubernetes Service.",
+    highlights: [
+      "Five backend services in C#/.NET 8 and Node.js communicating over gRPC, HTTP, and Kafka",
+      "Containerized with Docker and orchestrated on Azure Kubernetes Service (AKS)",
+      "CI/CD pipelines via GitHub Actions and Azure DevOps",
+      "MySQL and SQL Server tuned for efficient storage and retrieval",
+    ],
+    stack: [
+      "C#",
+      ".NET 8",
+      "Node.js",
+      "gRPC",
+      "Kafka",
+      "Docker",
+      "Kubernetes",
+      "AKS",
+      "Azure DevOps",
+      "MySQL",
+      "SQL Server",
+    ],
+    impact: [
+      { value: "5", label: "microservices" },
+      { value: "gRPC + Kafka", label: "service communication" },
+    ],
+    gallery: [
+      {
+        src: "/projects/jobbie.jpg",
+        alt: "Jobbie job board",
+        caption: "Architecture diagram coming soon.",
+        kind: "photo",
+      },
+    ],
   },
   {
     name: "Flavor Radar — Nestlé",
@@ -177,6 +356,35 @@ export const projects: Project[] = [
       icon: "flavor",
       image: "/projects/flavor.jpg",
     },
+    timeline: "2025",
+    role: "ML engineer · Nestlé project",
+    problem:
+      "Consumer-goods R&D teams need to spot emerging flavor trends early, but the signal is buried in millions of unstructured product reviews.",
+    overview:
+      "A sentiment-driven flavor-prediction system that mines 14M Amazon reviews to surface and rank emerging flavor trends, giving Nestlé a data-driven lens for R&D decisions.",
+    highlights: [
+      "Logistic Regression with TF-IDF plus RoBERTa to extract nuanced flavor sentiment from 14M reviews",
+      "Scoring model combining popularity, growth velocity, and sentiment to rank emerging trends",
+      "Outputs designed to guide data-driven R&D prioritization",
+    ],
+    stack: [
+      "Python",
+      "RoBERTa",
+      "TF-IDF",
+      "Logistic Regression",
+      "NLP",
+      "pandas",
+      "scikit-learn",
+    ],
+    impact: [{ value: "14M", label: "reviews analyzed" }],
+    gallery: [
+      {
+        src: "/projects/flavor.jpg",
+        alt: "Flavor Radar trend analysis",
+        caption: "Trend-ranking charts coming soon.",
+        kind: "photo",
+      },
+    ],
   },
   {
     name: "Branch",
@@ -193,6 +401,24 @@ export const projects: Project[] = [
       icon: "leaf",
       image: "/projects/branch.jpg",
     },
+    role: "Full-stack + ML developer",
+    problem:
+      "Plant owners forget watering schedules and struggle to identify species or diagnose an ailing plant.",
+    overview:
+      "A plant-focused social app with smart watering reminders — TensorFlow image classification identifies plants, while Arduino humidity sensors feed real-time soil data back to the app.",
+    highlights: [
+      "TensorFlow image classification for plant identification",
+      "Arduino humidity sensors streaming real-time soil data",
+      "Django backend with a React Native mobile client on AWS",
+    ],
+    stack: ["Django", "React Native", "TensorFlow", "AWS", "Arduino"],
+    gallery: [
+      {
+        src: "/projects/branch.jpg",
+        alt: "Branch plant app",
+        kind: "photo",
+      },
+    ],
   },
   {
     name: "Style Board",
@@ -214,6 +440,25 @@ export const projects: Project[] = [
         "/projects/style5.jpg",
       ],
     },
+    role: "Full-stack developer",
+    problem:
+      "Outfit inspiration lives on social feeds, but finding and buying the exact items someone posted is a scavenger hunt.",
+    overview:
+      "A Next.js social shopping app to browse clothing, discover outfit inspiration, and shop the exact products people post.",
+    highlights: [
+      "Social feed for posting and discovering outfits",
+      "Shoppable posts that link straight to the exact products",
+      "Next.js + MongoDB with a Tailwind UI",
+    ],
+    stack: ["Next.js", "MongoDB", "Tailwind", "TypeScript"],
+    gallery: [
+      { src: "/projects/style3.jpg", alt: "Style Board outfit inspiration", kind: "photo" },
+      { src: "/projects/style7.jpg", alt: "Style Board outfit inspiration", kind: "photo" },
+      { src: "/projects/style4.jpg", alt: "Style Board outfit inspiration", kind: "photo" },
+      { src: "/projects/style1.jpg", alt: "Style Board outfit inspiration", kind: "photo" },
+      { src: "/projects/style8.jpg", alt: "Style Board outfit inspiration", kind: "photo" },
+      { src: "/projects/style5.jpg", alt: "Style Board outfit inspiration", kind: "photo" },
+    ],
   },
   {
     name: "Dancing Robot",
@@ -226,6 +471,24 @@ export const projects: Project[] = [
       icon: "robot",
       image: "/projects/robot.jpg",
     },
+    role: "Embedded developer",
+    problem:
+      "A hands-on embedded-control challenge: make a robot balance, walk, and dance by coordinating multiple actuators and sensors in real time.",
+    overview:
+      "An Arduino-powered robot that walks and dances, coordinating multiple sensors and servo motors with embedded C++.",
+    highlights: [
+      "Coordinated multiple servo motors for walking and dance routines",
+      "Sensor fusion for balance and movement timing",
+      "Written in embedded C++ on Arduino",
+    ],
+    stack: ["Arduino", "C++", "Servo Motors", "Sensors"],
+    gallery: [
+      {
+        src: "/projects/robot.jpg",
+        alt: "Dancing Robot Arduino build",
+        kind: "photo",
+      },
+    ],
   },
 ];
 
