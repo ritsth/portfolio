@@ -165,7 +165,7 @@ export default function Hero() {
       </div>
       </div>
 
-      <div className="hidden shrink-0 lg:block lg:-mt-6">
+      <div className="hidden shrink-0 lg:block lg:-mt-24">
         <TicTacToe />
       </div>
     </section>
