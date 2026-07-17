@@ -3,24 +3,41 @@
 /* Class-based dark mode toggle */
 @custom-variant dark (&:where(.dark, .dark *));
 
+/*
+  Theme: an engineer's sketchbook.
+  Light mode = paper notebook (warm cream, ink, burnt orange).
+  Dark mode = chalkboard (deep warm charcoal, chalk, soft amber).
+*/
 :root {
-  --background: #fbfbfa;
-  --foreground: #1a1a1a;
-  --muted: #6b7280;
-  --card: #ffffff;
-  --border: #e7e7e4;
-  --accent: #0d9488;
-  --accent-soft: rgba(13, 148, 136, 0.1);
+  --background: #faf6ee;
+  --foreground: #2b2620;
+  --muted: #6b6152;
+  --card: #fffdf8;
+  --border: #e3dccd;
+  --accent: #b0552a;
+  --accent-soft: rgba(176, 85, 42, 0.12);
+  --ink: #2b2620;
+  --doodle: #8a7f6d;
+  --sticky: #fff4a3;
+  --sticky-ink: #57503a;
+  --margin-line: rgba(196, 92, 60, 0.35);
+  --paper-line: rgba(43, 38, 32, 0.055);
 }
 
 .dark {
-  --background: #0b0f10;
-  --foreground: #e6edf3;
-  --muted: #8b98a5;
-  --card: #11171a;
-  --border: #1e272c;
-  --accent: #5eead4;
-  --accent-soft: rgba(94, 234, 212, 0.1);
+  --background: #1d2321;
+  --foreground: #e9e4d8;
+  --muted: #a09a8b;
+  --card: #242b28;
+  --border: #39423e;
+  --accent: #e8a15c;
+  --accent-soft: rgba(232, 161, 92, 0.14);
+  --ink: #e9e4d8;
+  --doodle: #8f998f;
+  --sticky: #e5c95d;
+  --sticky-ink: #453d22;
+  --margin-line: rgba(232, 161, 92, 0.3);
+  --paper-line: rgba(233, 228, 216, 0.05);
 }
 
 @theme inline {
@@ -31,8 +48,13 @@
   --color-border: var(--border);
   --color-accent: var(--accent);
   --color-accent-soft: var(--accent-soft);
+  --color-ink: var(--ink);
+  --color-doodle: var(--doodle);
+  --color-sticky: var(--sticky);
+  --color-sticky-ink: var(--sticky-ink);
   --font-sans: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   --font-mono: var(--font-mono), ui-monospace, monospace;
+  --font-hand: var(--font-caveat), "Bradley Hand", "Segoe Print", cursive;
 }
 
 html {
@@ -53,13 +75,41 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-/* Subtle radial glow behind the page */
-.bg-glow {
-  background-image: radial-gradient(
-    600px circle at 0% 0%,
-    var(--accent-soft),
-    transparent 40%
+/* Ruled notebook page: faint horizontal lines + red margin line on lg+. */
+.notebook-page {
+  background-image: repeating-linear-gradient(
+    transparent,
+    transparent 31px,
+    var(--paper-line) 31px,
+    var(--paper-line) 32px
   );
+}
+
+@media (min-width: 1024px) {
+  .notebook-margin {
+    position: relative;
+  }
+  .notebook-margin::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: max(1.5rem, calc(50% - 27rem));
+    width: 1px;
+    background: var(--margin-line);
+    pointer-events: none;
+  }
+}
+
+/* Hand-drawn wobbly border (sketchy rectangle) */
+.wobbly {
+  border-radius: 255px 15px 225px 15px / 15px 225px 15px 255px;
+}
+.wobbly-sm {
+  border-radius: 125px 10px 105px 10px / 10px 105px 10px 125px;
+}
+.wobbly-alt {
+  border-radius: 15px 225px 15px 255px / 255px 15px 225px 15px;
 }
 
 /* Scroll-reveal animation */

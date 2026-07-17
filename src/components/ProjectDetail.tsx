@@ -3,6 +3,7 @@
 import { motion } from "motion/react";
 import type { Project } from "@/lib/data";
 import { ArrowIcon } from "./Icons";
+import { StickyNote } from "./Doodles";
 
 function CloseIcon({ className }: { className?: string }) {
   return (
@@ -45,12 +46,24 @@ export default function ProjectDetail({
         onClick={onClose}
       />
 
-      {/* panel — shares layoutId with the rail card so it morphs open/closed */}
+      {/* panel — springs open from center; no shared layoutId (a layout
+          morph back to the still-mounted card never completes and hangs
+          the dialog in this Motion/React version) */}
       <motion.div
-        layoutId={reduce ? undefined : `project-${p.name}`}
-        initial={reduce ? { opacity: 0 } : false}
-        animate={reduce ? { opacity: 1 } : undefined}
-        exit={reduce ? { opacity: 0 } : undefined}
+        initial={{ opacity: 0, scale: reduce ? 1 : 0.9, y: reduce ? 0 : 28 }}
+        animate={{
+          opacity: 1,
+          scale: 1,
+          y: 0,
+          transition: reduce
+            ? { duration: 0.2 }
+            : { type: "spring", stiffness: 260, damping: 24 },
+        }}
+        exit={{
+          opacity: 0,
+          scale: reduce ? 1 : 0.96,
+          transition: { duration: 0.18 },
+        }}
         role="dialog"
         aria-modal="true"
         aria-label={`${p.name} — case study`}
@@ -108,6 +121,12 @@ export default function ProjectDetail({
           transition={{ delay: reduce ? 0 : 0.15, duration: 0.3 }}
           className="min-h-0 flex-1 space-y-7 overflow-y-auto p-6 sm:p-7"
         >
+          {p.originStory && (
+            <StickyNote label="why I built it:" rotate={1.5} className="max-w-md">
+              {p.originStory}
+            </StickyNote>
+          )}
+
           {p.problem && (
             <section>
               <h3 className="mb-2 font-mono text-xs uppercase tracking-widest text-accent">
@@ -170,6 +189,27 @@ export default function ProjectDetail({
                   </li>
                 ))}
               </ul>
+            </section>
+          )}
+
+          {p.lessons && (
+            <section
+              className="wobbly-alt border-2 border-dashed p-5"
+              style={{ borderColor: "var(--doodle)" }}
+            >
+              <h3 className="font-hand mb-2 text-lg text-accent">
+                what I got wrong (and what I&apos;d do differently)
+              </h3>
+              <p className="text-sm leading-relaxed text-muted">
+                <span className="font-semibold text-foreground">
+                  The mistake:{" "}
+                </span>
+                {p.lessons.mistake}
+              </p>
+              <p className="mt-2 text-sm leading-relaxed text-muted">
+                <span className="font-semibold text-foreground">The fix: </span>
+                {p.lessons.fix}
+              </p>
             </section>
           )}
 
