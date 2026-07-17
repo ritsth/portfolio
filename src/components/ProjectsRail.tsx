@@ -1,9 +1,10 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { AnimatePresence, motion, useReducedMotion } from "motion/react";
+import { motion, useReducedMotion } from "motion/react";
 import { projects, type Project, type ProjectIcon } from "@/lib/data";
-import { ArrowIcon, ChevronIcon } from "./Icons";
+import { ChevronIcon } from "./Icons";
+import { HandLabel, SectionHeader } from "./Doodles";
 import ProjectDetail from "./ProjectDetail";
 
 // A large, subtle watermark icon that reflects each project's domain.
@@ -70,7 +71,138 @@ function PosterIcon({ icon, className }: { icon: ProjectIcon; className?: string
           <path d="M9 3a2 2 0 0 1 4 0c0 .5-.2 1-.5 1.4.3.3.5.7.5 1.1h3.5a1 1 0 0 1 1 1V10c.4 0 .8-.2 1.1-.5.4-.3.9-.5 1.4-.5a2 2 0 0 1 0 4c-.5 0-1-.2-1.4-.5-.3-.3-.7-.5-1.1-.5v3.5a1 1 0 0 1-1 1H13c0 .4.2.8.5 1.1.3.4.5.9.5 1.4a2 2 0 0 1-4 0c0-.5.2-1 .5-1.4.3-.3.5-.7.5-1.1H7.5a1 1 0 0 1-1-1V13c-.4 0-.8.2-1.1.5-.4.3-.9.5-1.4.5a2 2 0 0 1 0-4c.5 0 1 .2 1.4.5.3.3.7.5 1.1.5V7.5a1 1 0 0 1 1-1H9c0-.4-.2-.8-.5-1.1C8.2 5 8 4.5 8 4" />
         </svg>
       );
+    case "chat": // TransCore chatbot — support conversations
+      return (
+        <svg {...common}>
+          <path d="M21 12a8 8 0 0 1-8 8H4l2.4-2.9A8 8 0 1 1 21 12Z" />
+          <path d="M8.5 10.5h7M8.5 13.5h4.5" />
+        </svg>
+      );
   }
+}
+
+/** Bits of "tape" holding a clipping onto the page. */
+function Tape({ className = "" }: { className?: string }) {
+  return (
+    <span
+      aria-hidden
+      className={`pointer-events-none absolute z-10 h-5 w-14 opacity-70 ${className}`}
+      style={{
+        background: "var(--accent-soft)",
+        border: "1px solid var(--border)",
+        transform: "rotate(-4deg)",
+      }}
+    />
+  );
+}
+
+function ProjectCard({
+  project: p,
+  index,
+  reduce,
+  onOpen,
+}: {
+  project: Project;
+  index: number;
+  reduce: boolean;
+  onOpen: () => void;
+}) {
+  const cardRef = useRef<HTMLElement>(null);
+  const [tilt, setTilt] = useState({ x: 0, y: 0 });
+
+  const cardImage = p.theme.image ?? p.theme.collage?.[0];
+  const wobble = index % 2 === 0 ? "wobbly" : "wobbly-alt";
+
+  function onMove(e: React.MouseEvent) {
+    if (reduce) return;
+    const el = cardRef.current;
+    if (!el) return;
+    const r = el.getBoundingClientRect();
+    setTilt({
+      x: ((e.clientY - r.top) / r.height - 0.5) * -7,
+      y: ((e.clientX - r.left) / r.width - 0.5) * 7,
+    });
+  }
+
+  return (
+    <motion.article
+      ref={cardRef}
+      onMouseMove={onMove}
+      onMouseLeave={() => setTilt({ x: 0, y: 0 })}
+      whileHover={reduce ? undefined : { scale: 1.03 }}
+      transition={{ type: "spring", stiffness: 300, damping: 22 }}
+      style={{ borderColor: "var(--ink)" }}
+      onClick={onOpen}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          e.preventDefault();
+          onOpen();
+        }
+      }}
+      role="button"
+      tabIndex={0}
+      aria-label={`${p.name} — open case study`}
+      className={`group relative w-[280px] shrink-0 cursor-pointer snap-start border-2 bg-card p-3 pb-4 shadow-sm transition-shadow hover:z-10 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${wobble}`}
+    >
+      <span className="font-hand pointer-events-none absolute -top-3 left-4 z-10 bg-background px-2 text-base text-accent">
+        no. {String(index + 1).padStart(2, "0")}
+        {p.featured && " ★"}
+      </span>
+
+      {/* the "clipping": screenshot taped onto the card — tilts toward the cursor */}
+      <motion.div
+        className="relative"
+        animate={{ rotateX: tilt.x, rotateY: tilt.y }}
+        transition={{ type: "spring", stiffness: 300, damping: 22 }}
+        style={{ transformPerspective: 600 }}
+      >
+        <Tape className="-left-3 -top-2" />
+        <Tape className="-right-3 -top-2 rotate-6" />
+        <div
+          className="relative h-40 overflow-hidden rounded-sm border border-border"
+          style={{ transform: `rotate(${index % 2 === 0 ? -1 : 1.2}deg)` }}
+        >
+          <div className={`absolute inset-0 bg-gradient-to-br ${p.theme.gradient} opacity-20`} />
+          {cardImage ? (
+            // eslint-disable-next-line @next/next/no-img-element
+            <img
+              src={cardImage}
+              alt=""
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-cover"
+            />
+          ) : (
+            <PosterIcon
+              icon={p.theme.icon}
+              className="absolute right-2 top-2 h-28 w-28 text-doodle opacity-40"
+            />
+          )}
+        </div>
+      </motion.div>
+
+      <h3 className="mt-4 text-base font-bold leading-snug text-foreground">
+        {p.name}
+      </h3>
+      <p className="mt-1.5 line-clamp-3 text-[13px] leading-relaxed text-muted">
+        {p.blurb}
+      </p>
+
+      <ul className="mt-3 flex flex-wrap gap-1.5">
+        {p.tags.slice(0, 4).map((t) => (
+          <li
+            key={t}
+            className="wobbly-sm border border-border px-2 py-0.5 font-mono text-[10.5px] font-medium text-muted"
+          >
+            {t}
+          </li>
+        ))}
+      </ul>
+
+      <span className="font-hand mt-3 block text-base text-accent opacity-0 transition-opacity duration-200 group-hover:opacity-100">
+        open the case study →
+      </span>
+    </motion.article>
+  );
 }
 
 export default function ProjectsRail() {
@@ -79,7 +211,7 @@ export default function ProjectsRail() {
   const reduce = useReducedMotion() ?? false;
 
   function scroll(dir: 1 | -1) {
-    railRef.current?.scrollBy({ left: dir * 300, behavior: "smooth" });
+    railRef.current?.scrollBy({ left: dir * 310, behavior: "smooth" });
   }
 
   // Esc to close + lock body scroll while a case study is open.
@@ -98,23 +230,25 @@ export default function ProjectsRail() {
   }, [active]);
 
   return (
-    <section id="projects" className="mt-24 scroll-mt-24 lg:mt-36">
-      <div className="mb-6 flex items-center justify-between">
-        <h2 className="text-xs font-bold uppercase tracking-widest text-muted">
-          Projects
-        </h2>
+    <section id="projects" className="mt-28 scroll-mt-24">
+      <div className="flex items-start justify-between">
+        <SectionHeader
+          number="02"
+          title="Projects"
+          handNote="things I've built"
+        />
         <div className="flex gap-2">
           <button
             onClick={() => scroll(-1)}
             aria-label="Scroll projects left"
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-accent hover:text-accent"
+            className="wobbly-sm inline-flex h-9 w-9 items-center justify-center border border-border text-muted transition-colors hover:border-accent hover:text-accent"
           >
             <ChevronIcon className="h-4 w-4 rotate-180" />
           </button>
           <button
             onClick={() => scroll(1)}
             aria-label="Scroll projects right"
-            className="inline-flex h-8 w-8 items-center justify-center rounded-full border border-border text-muted transition-colors hover:border-accent hover:text-accent"
+            className="wobbly-sm inline-flex h-9 w-9 items-center justify-center border border-border text-muted transition-colors hover:border-accent hover:text-accent"
           >
             <ChevronIcon className="h-4 w-4" />
           </button>
@@ -123,135 +257,33 @@ export default function ProjectsRail() {
 
       <div
         ref={railRef}
-        className="-mx-2 flex snap-x snap-mandatory gap-4 overflow-x-auto px-2 py-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
+        className="-mx-2 flex snap-x snap-mandatory gap-5 overflow-x-auto px-2 py-4 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden"
       >
         {projects.map((p, i) => (
-          <motion.article
+          <ProjectCard
             key={p.name}
-            layoutId={reduce ? undefined : `project-${p.name}`}
-            whileHover={reduce ? undefined : { scale: 1.03 }}
-            transition={{ type: "spring", stiffness: 400, damping: 32 }}
-            onClick={() => setActive(p)}
-            onKeyDown={(e) => {
-              if (e.key === "Enter" || e.key === " ") {
-                e.preventDefault();
-                setActive(p);
-              }
-            }}
-            role="button"
-            tabIndex={0}
-            aria-label={`${p.name} — open case study`}
-            className="group relative h-72 w-[270px] shrink-0 cursor-pointer snap-start overflow-hidden rounded-2xl border border-border shadow-sm transition-colors duration-300 hover:z-10 hover:border-accent hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent"
-          >
-            {/* base themed gradient (shows behind/while photos load) */}
-            <div
-              className={`absolute inset-0 bg-gradient-to-br ${p.theme.gradient}`}
-            />
-
-            {/* background: Pinterest collage, single photo, or dot texture */}
-            {p.theme.collage ? (
-              <div className="absolute inset-0 columns-3 gap-1 [column-fill:balance]">
-                {p.theme.collage.map((src) => (
-                  // eslint-disable-next-line @next/next/no-img-element
-                  <img
-                    key={src}
-                    src={src}
-                    alt=""
-                    loading="lazy"
-                    className="mb-1 block w-full break-inside-avoid object-cover"
-                  />
-                ))}
-              </div>
-            ) : p.theme.image ? (
-              // eslint-disable-next-line @next/next/no-img-element
-              <img
-                src={p.theme.image}
-                alt=""
-                loading="lazy"
-                className="absolute inset-0 h-full w-full object-cover"
-              />
-            ) : (
-              <div
-                className="absolute inset-0 opacity-25"
-                style={{
-                  backgroundImage:
-                    "radial-gradient(rgba(255,255,255,0.5) 1px, transparent 1px)",
-                  backgroundSize: "16px 16px",
-                }}
-              />
-            )}
-
-            {/* themed color wash so each card carries its theme color */}
-            {(p.theme.image || p.theme.collage) && (
-              <div
-                className={`absolute inset-0 bg-gradient-to-br ${p.theme.gradient} opacity-35 mix-blend-soft-light`}
-              />
-            )}
-
-            {/* readability tint — darkens on hover so details stay legible */}
-            <div className="absolute inset-0 bg-black/25 transition-colors duration-300 group-hover:bg-black/60" />
-
-            {/* domain watermark icon (only when there's no photo) */}
-            {!p.theme.image && !p.theme.collage && (
-              <PosterIcon
-                icon={p.theme.icon}
-                className="pointer-events-none absolute -right-6 -top-6 h-40 w-40 text-white/20 transition-transform duration-500 group-hover:scale-110"
-              />
-            )}
-            <span className="pointer-events-none absolute left-4 top-3 select-none font-mono text-2xl font-black text-white/60 drop-shadow">
-              {String(i + 1).padStart(2, "0")}
-            </span>
-            {p.featured && (
-              <span className="absolute right-3 top-3 rounded-full bg-black/30 px-2.5 py-1 font-mono text-[10px] font-semibold uppercase tracking-widest text-white backdrop-blur-sm">
-                ★ Featured
-              </span>
-            )}
-
-            {/* info panel */}
-            <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/85 via-black/55 to-transparent p-5 pt-12">
-              <h3 className="text-lg font-bold text-white">{p.name}</h3>
-
-              <ul className="mt-2 flex flex-wrap gap-1.5">
-                {p.tags.slice(0, 4).map((t) => (
-                  <li
-                    key={t}
-                    className="rounded-full bg-white/15 px-2 py-0.5 text-[11px] font-medium text-white backdrop-blur-sm"
-                  >
-                    {t}
-                  </li>
-                ))}
-              </ul>
-
-              {/* revealed on hover */}
-              <div className="grid grid-rows-[0fr] transition-all duration-300 group-hover:mt-3 group-hover:grid-rows-[1fr]">
-                <div className="overflow-hidden">
-                  <p className="text-[13px] leading-relaxed text-white/85">
-                    {p.blurb}
-                  </p>
-                  <span className="mt-3 inline-flex items-center gap-1 text-xs font-semibold text-white">
-                    View case study
-                    <ArrowIcon className="h-3.5 w-3.5" />
-                  </span>
-                </div>
-              </div>
-            </div>
-          </motion.article>
+            project={p}
+            index={i}
+            reduce={reduce}
+            onOpen={() => setActive(p)}
+          />
         ))}
       </div>
-      <p className="mt-2 px-2 font-mono text-[11px] text-muted">
-        ← scroll · click a project for the full case study
-      </p>
+      <HandLabel rotate={-1} className="mt-1 block px-2 text-base text-doodle">
+        ← scroll sideways · click any card for the full story
+      </HandLabel>
 
-      <AnimatePresence>
-        {active && (
-          <ProjectDetail
-            key={active.name}
-            project={active}
-            reduce={reduce}
-            onClose={() => setActive(null)}
-          />
-        )}
-      </AnimatePresence>
+      {/* No AnimatePresence: exit-completion never fires in this
+          Motion/React combo and the dialog hangs open. Enter animations
+          still run; close is instant. */}
+      {active && (
+        <ProjectDetail
+          key={active.name}
+          project={active}
+          reduce={reduce}
+          onClose={() => setActive(null)}
+        />
+      )}
     </section>
   );
 }

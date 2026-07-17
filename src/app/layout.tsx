@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, JetBrains_Mono } from "next/font/google";
+import { Caveat, Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import { profile } from "@/lib/data";
 
@@ -10,6 +10,12 @@ const inter = Inter({
 
 const mono = JetBrains_Mono({
   variable: "--font-mono",
+  subsets: ["latin"],
+});
+
+// Handwriting font for margin notes, sticky notes, and annotations.
+const caveat = Caveat({
+  variable: "--font-caveat",
   subsets: ["latin"],
 });
 
@@ -27,11 +33,9 @@ export const metadata: Metadata = {
 const themeScript = `
   try {
     const stored = localStorage.getItem('theme');
-    const dark = stored ? stored === 'dark' : true;
+    const dark = stored === 'dark';
     if (dark) document.documentElement.classList.add('dark');
-  } catch (_) {
-    document.documentElement.classList.add('dark');
-  }
+  } catch (_) {}
 `;
 
 export default function RootLayout({
@@ -42,7 +46,7 @@ export default function RootLayout({
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${mono.variable} h-full`}
+      className={`${inter.variable} ${mono.variable} ${caveat.variable} h-full`}
       suppressHydrationWarning
     >
       <head>

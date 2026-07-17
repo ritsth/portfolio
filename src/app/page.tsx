@@ -1,31 +1,31 @@
-import Sidebar from "@/components/Sidebar";
+import TopNav from "@/components/TopNav";
+import Hero from "@/components/Hero";
 import ProjectsRail from "@/components/ProjectsRail";
 import {
   About,
   Experience,
   Skills,
   Involvement,
+  Now,
   Contact,
   Footer,
 } from "@/components/Sections";
 
 export default function Home() {
   return (
-    <div className="bg-glow min-h-screen">
-      <div className="mx-auto max-w-6xl px-6 sm:px-10 lg:px-16">
-        <div className="lg:flex lg:justify-between lg:gap-12">
-          <Sidebar />
-          <main className="pt-16 lg:w-[56%] lg:py-24">
-            <About />
-            <Experience />
-            <ProjectsRail />
-            <Skills />
-            <Involvement />
-            <Contact />
-            <Footer />
-          </main>
-        </div>
-      </div>
+    <div id="top" className="notebook-page notebook-margin min-h-screen">
+      <TopNav />
+      <main className="mx-auto max-w-[54rem] px-6 sm:px-10">
+        <Hero />
+        <About />
+        <ProjectsRail />
+        <Experience />
+        <Skills />
+        <Involvement />
+        <Now />
+        <Contact />
+        <Footer />
+      </main>
     </div>
   );
 }

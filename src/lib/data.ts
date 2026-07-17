@@ -92,7 +92,8 @@ export type ProjectIcon =
   | "fashion"
   | "robot"
   | "cart"
-  | "puzzle";
+  | "puzzle"
+  | "chat";
 
 export type ProjectMedia = {
   src: string;
@@ -122,9 +123,59 @@ export type Project = {
   stack?: string[]; // full tech list (superset of tags)
   impact?: { value: string; label: string }[]; // headline metrics
   gallery?: ProjectMedia[]; // multiple images; falls back to theme.image/collage when absent
+  originStory?: string; // handwritten "why I built it" sticky note
+  lessons?: { mistake: string; fix: string }; // what went wrong + what I'd do differently
 };
 
 export const projects: Project[] = [
+  {
+    name: "TransCore AI Support Chatbot",
+    blurb:
+      "An AI customer-service chatbot for toll processing, built during my TransCore internship — locally hosted open-source LLMs, LoRA fine-tuning, RAG over live company docs, and prompt-injection guardrails.",
+    tags: ["LLMs", "RAG", "Ollama", "LoRA", "Python"],
+    links: [],
+    featured: true,
+    theme: {
+      gradient: "from-cyan-600 via-teal-700 to-slate-900",
+      icon: "chat",
+      image: "/projects/transcore-arch.svg",
+    },
+    timeline: "Summer 2025",
+    role: "Software engineer intern · internship work",
+    problem:
+      "TransCore's customer service team fields a steady stream of FAQ and toll-processing inquiries. An off-the-shelf chatbot API wasn't an option: customer data couldn't leave the company, GPU memory was limited, and a support bot that hallucinates toll charges is worse than no bot at all.",
+    overview:
+      "An AI-powered customer-service chatbot built with my team during my TransCore internship. We hosted quantized open-source models (Qwen, Mistral, LLaMA) locally with Ollama to keep data private within company infrastructure, and grounded every answer in real-time company documents through a RAG pipeline.",
+    highlights: [
+      "Quantized Qwen / Mistral / LLaMA models hosted locally via Ollama — chosen for data privacy and to fit GPU memory limits",
+      "LoRA fine-tuning on custom datasets to create an empathetic conversational style, evaluated with an automated LLM judge scoring de-escalation and professionalism",
+      "RAG pipeline pulling from real-time company documents so answers stay factual instead of hallucinated",
+      "Security guardrails — input sanitization and semantic routing — to block prompt injections and safely handle sensitive user interactions",
+    ],
+    stack: [
+      "Python",
+      "Ollama",
+      "Qwen / Mistral / LLaMA",
+      "LoRA",
+      "RAG",
+      "LLM-as-judge",
+      "Cloud VMs",
+    ],
+    impact: [
+      { value: "Local-only", label: "models — customer data never leaves" },
+      { value: "LLM judge", label: "automated tone & safety evals" },
+    ],
+    gallery: [
+      {
+        src: "/projects/transcore-arch.svg",
+        alt: "Hand-drawn architecture sketch: user messages flow through guardrails to a RAG pipeline and locally hosted LLMs",
+        caption: "How a question becomes a safe, grounded answer.",
+        kind: "diagram",
+      },
+    ],
+    originStory:
+      "my first industry AI project — and the moment I realized shipping an LLM safely is a much harder (and more fun) problem than calling an API.",
+  },
   {
     name: "Blueberry Mart",
     blurb:
@@ -216,6 +267,8 @@ export const projects: Project[] = [
         kind: "screenshot",
       },
     ],
+    originStory:
+      "my dad is building a multi-branch grocery store in Nepal, so I took full ownership of building the infrastructure to support it.",
   },
   {
     name: "Little AI Helper",
@@ -288,6 +341,8 @@ export const projects: Project[] = [
         kind: "screenshot",
       },
     ],
+    originStory:
+      "applying to jobs was eating my life — same fields, same questions, dozens of times a week. so I made the robot help me with it.",
   },
   {
     name: "Jobbie",
@@ -341,6 +396,13 @@ export const projects: Project[] = [
         kind: "photo",
       },
     ],
+    originStory:
+      "microservices were everywhere and I wanted to know why. so five of us built one for real — I led the backend.",
+    lessons: {
+      mistake:
+        "We put JWT validation inside each of the five microservices. Rotating a key or changing auth logic meant updating and redeploying all five services — redundant and risky.",
+      fix: "Today I'd put a centralized API gateway (Ocelot or YARP) at the front to handle SSL termination and JWT verification before requests ever reach internal services — keeping each microservice focused purely on business logic. We did get cross-database consistency right: Kafka with the transactional outbox pattern, so an event and its data commit atomically or not at all.",
+    },
   },
   {
     name: "Flavor Radar — Nestlé",
@@ -357,26 +419,30 @@ export const projects: Project[] = [
       image: "/projects/flavor.jpg",
     },
     timeline: "2025",
-    role: "ML engineer · Nestlé project",
+    role: "ML engineer · Breakthrough Tech AI Studio project with Nestlé",
     problem:
-      "Consumer-goods R&D teams need to spot emerging flavor trends early, but the signal is buried in millions of unstructured product reviews.",
+      "Nestlé's R&D teams need to spot emerging flavor trends before the market does — but the signal is buried in millions of unstructured product reviews, and raw star ratings can't tell genuine excitement from viral hype or negative complaints.",
     overview:
-      "A sentiment-driven flavor-prediction system that mines 14M Amazon reviews to surface and rank emerging flavor trends, giving Nestlé a data-driven lens for R&D decisions.",
+      "A data-driven \"Flavor Radar\" built with Nestlé through the Breakthrough Tech AI Studio: ~14 million Amazon reviews filtered to Grocery & Gourmet Food, mined with NLP to track how consumer excitement around flavors changes over time and predict future market demand.",
     highlights: [
-      "Logistic Regression with TF-IDF plus RoBERTa to extract nuanced flavor sentiment from 14M reviews",
-      "Scoring model combining popularity, growth velocity, and sentiment to rank emerging trends",
-      "Outputs designed to guide data-driven R&D prioritization",
+      "Exploratory data analysis of quarterly flavor mentions to separate stable, mature flavors from fast-rising opportunities",
+      "Moved from a rule-based VADER baseline to a RoBERTa-based transformer with zero-shot classification to handle rating imbalance and capture context-specific sentiment",
+      "Combined trend-growth metrics with context-aware sentiment into a single \"Emerging Score\" that ranks flavor directions",
+      "Outputs designed to help Nestlé reduce R&D risk and prioritize promising flavors",
     ],
     stack: [
       "Python",
       "RoBERTa",
-      "TF-IDF",
-      "Logistic Regression",
+      "Zero-shot classification",
+      "VADER",
       "NLP",
       "pandas",
       "scikit-learn",
     ],
-    impact: [{ value: "14M", label: "reviews analyzed" }],
+    impact: [
+      { value: "14M", label: "Amazon reviews analyzed" },
+      { value: "1 score", label: "Emerging Score ranks every flavor" },
+    ],
     gallery: [
       {
         src: "/projects/flavor.jpg",
@@ -419,6 +485,13 @@ export const projects: Project[] = [
         kind: "photo",
       },
     ],
+    originStory:
+      "this one's for my mom — she's a huge plant enthusiast, so I built her an app that reminds you to water them and tells you what each plant needs.",
+    lessons: {
+      mistake:
+        "Integrating the Arduino Bluetooth module with the React front end failed on the first attempt — real-time hardware data and a web UI don't just plug together.",
+      fix: "I broke the problem apart: got the sensor data flowing reliably to the backend first, then let the app read from there instead of talking to hardware directly.",
+    },
   },
   {
     name: "Style Board",
@@ -559,6 +632,45 @@ export const honors: Honor[] = [
     description: "Maintained GPA of 3.79 / 4.00 throughout degree",
   },
 ];
+
+// The "Now" section — what I'm currently up to. Update occasionally.
+export const now = {
+  updated: "July 2026",
+  items: [
+    {
+      label: "building",
+      text: "iterating on Little AI Helper — smarter autofill and better cover letters, based on real user feedback from the Chrome Web Store",
+    },
+    {
+      label: "learning",
+      text: "machine-learning coursework with Cornell faculty through the Breakthrough Tech AI fellowship",
+    },
+    {
+      label: "working on",
+      text: "benchmarking AI models against engineered evaluation rubrics as a Handshake AI Fellow",
+    },
+    {
+      label: "looking for",
+      text: "a full-time software engineering or AI role where I can ship things people actually use",
+    },
+  ],
+};
+
+// About-section journey — the person behind the code.
+export const journey = {
+  photo: "/ritika.jpg",
+  paragraphs: [
+    "I grew up in Nepal and came to Denison University to study Computer Science and Mathematics. Somewhere between my first robot (it danced, sort of) and my first production LLM system, building software went from a major to a habit I can't put down.",
+    "Last summer I interned at TransCore, where my team built an AI customer-service chatbot — open-source LLMs hosted locally for privacy, RAG to keep answers honest, and guardrails to keep prompt injections out. As a Breakthrough Tech AI fellow at Cornell Tech, I worked with Nestlé on predicting flavor trends from 14 million Amazon reviews.",
+    "When I'm not coding, I'm probably organizing a Nepali cultural event on campus — I chair cultural events for the Nepalese Student Association, which is my favorite way of bringing a piece of home to Ohio.",
+  ],
+  facts: [
+    { label: "from", value: "Kathmandu, Nepal" },
+    { label: "studied", value: "CS + Math @ Denison" },
+    { label: "gpa", value: "3.79 — Dean's List every year" },
+    { label: "favorite bug", value: "the Bluetooth one that took 3 weeks" },
+  ],
+};
 
 export const skills: { group: string; items: string[] }[] = [
   {
