@@ -86,7 +86,7 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative pb-20 pt-24 sm:pt-32 lg:flex lg:items-center lg:justify-between lg:gap-10">
+    <section className="relative pb-20 pt-24 sm:pt-32 lg:flex lg:items-start lg:justify-between lg:gap-10">
       <div className="min-w-0">
       <div className="relative flex flex-wrap items-center gap-2">
         <button
@@ -165,7 +165,7 @@ export default function Hero() {
       </div>
       </div>
 
-      <div className="hidden shrink-0 lg:block">
+      <div className="hidden shrink-0 lg:block lg:-mt-6">
         <TicTacToe />
       </div>
     </section>
