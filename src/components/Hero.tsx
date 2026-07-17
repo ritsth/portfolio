@@ -5,6 +5,7 @@ import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { profile } from "@/lib/data";
 import { DoodleArrow, HandLabel, Squiggle } from "./Doodles";
 import { GitHubIcon, LinkedInIcon, MailIcon } from "./Icons";
+import TicTacToe from "./TicTacToe";
 
 function BouncyName({ name }: { name: string }) {
   const reduce = useReducedMotion() ?? false;
@@ -85,7 +86,8 @@ export default function Hero() {
   }
 
   return (
-    <section className="relative pb-20 pt-24 sm:pt-32">
+    <section className="relative pb-20 pt-24 sm:pt-32 lg:flex lg:items-center lg:justify-between lg:gap-10">
+      <div className="min-w-0">
       <div className="relative flex flex-wrap items-center gap-2">
         <button
           onClick={poke}
@@ -160,6 +162,11 @@ export default function Hero() {
         >
           résumé
         </motion.a>
+      </div>
+      </div>
+
+      <div className="hidden shrink-0 lg:block">
+        <TicTacToe />
       </div>
     </section>
   );

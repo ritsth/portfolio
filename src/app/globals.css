@@ -132,6 +132,20 @@ body {
   animation: reveal 0.6s cubic-bezier(0.22, 1, 0.36, 1) forwards;
 }
 
+/* Self-drawing SVG stroke. Pure CSS on purpose: Motion's JS-driven
+   pathLength freezes mid-draw for elements mounted after a state update
+   in this stack. Requires pathLength={1} on the <path>. */
+@keyframes draw-stroke {
+  to {
+    stroke-dashoffset: 0;
+  }
+}
+.draw-stroke {
+  stroke-dasharray: 1;
+  stroke-dashoffset: 1;
+  animation: draw-stroke 0.3s ease-out forwards;
+}
+
 @media (prefers-reduced-motion: reduce) {
   html {
     scroll-behavior: auto;
@@ -139,6 +153,10 @@ body {
   .reveal,
   .reveal.in-view {
     opacity: 1;
+    animation: none;
+  }
+  .draw-stroke {
+    stroke-dashoffset: 0;
     animation: none;
   }
 }
