@@ -102,7 +102,7 @@ export default function Hero() {
         <span className="pointer-events-none hidden items-center gap-1 lg:inline-flex">
           <DoodleArrow flip className="h-7 w-11" />
           <HandLabel rotate={2} className="whitespace-nowrap text-doodle">
-            this site reacts — try poking things
+            this site reacts, try poking things
           </HandLabel>
         </span>
       </div>

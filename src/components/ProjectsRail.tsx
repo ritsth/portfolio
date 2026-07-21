@@ -141,7 +141,7 @@ function ProjectCard({
       }}
       role="button"
       tabIndex={0}
-      aria-label={`${p.name} — open case study`}
+      aria-label={`${p.name}: open case study`}
       className={`group relative w-[280px] shrink-0 cursor-pointer snap-start border-2 bg-card p-3 pb-4 shadow-sm transition-shadow hover:z-10 hover:shadow-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-accent ${wobble}`}
     >
       <span className="font-hand pointer-events-none absolute -top-3 left-4 z-10 bg-background px-2 text-base text-accent">

@@ -6,7 +6,7 @@ import { HandLabel } from "./Doodles";
 /*
   A game of tic-tac-toe doodled in the notebook margin.
   You're ✗ (ink); the site is ◯ (accent pen). The opponent plays a decent
-  game but blunders now and then — beating it is supposed to be possible.
+  game but blunders now and then, so beating it is supposed to be possible.
 
   Strokes draw themselves via the CSS .draw-stroke keyframe, not Motion:
   JS-driven pathLength animations freeze mid-draw for elements mounted
@@ -184,7 +184,7 @@ function Strike({ line, mark }: { line: number[]; mark: "x" | "o" }) {
   );
 }
 
-const OPENING_LINES = ["your move — you're ✗", "you first. no pressure.", "loser buys coffee ☕"];
+const OPENING_LINES = ["your move, you're ✗", "you first. no pressure.", "loser buys coffee ☕"];
 const THINKING_LINES = ["hmm…", "let me think…", "interesting…", "ok ok…"];
 const PLAYER_TURN_LINES = ["your turn", "you again", "and… you"];
 const I_WIN_LINES = ["ha! got you ✏️", "the site wins this one 😌", "gg. rematch?"];
