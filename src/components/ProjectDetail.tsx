@@ -66,7 +66,7 @@ export default function ProjectDetail({
         }}
         role="dialog"
         aria-modal="true"
-        aria-label={`${p.name} — case study`}
+        aria-label={`${p.name}: case study`}
         className="relative z-10 flex max-h-[92vh] w-full max-w-3xl flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-2xl"
       >
         {/* hero */}

@@ -37,7 +37,7 @@ export function About() {
           <p>
             Last summer I interned at{" "}
             <span className="font-medium text-foreground">TransCore</span>,
-            where my team built an AI customer-service chatbot — open-source
+            where my team built an AI customer-service chatbot built on open-source
             LLMs hosted locally for privacy, RAG to keep answers honest, and
             guardrails to keep prompt injections out. As a{" "}
             <span className="font-medium text-foreground">
@@ -48,7 +48,7 @@ export function About() {
           </p>
           <p>
             When I&apos;m not coding, I&apos;m probably organizing a Nepali
-            cultural event on campus — I chair cultural events for the
+            cultural event on campus. I chair cultural events for the
             Nepalese Student Association, which is my favorite way of bringing
             a piece of home to Ohio.
           </p>
@@ -265,7 +265,7 @@ export function Now() {
         handNote={`updated ${now.updated}`}
       />
       <p className="mb-6 max-w-lg text-sm leading-relaxed text-muted">
-        A living note of what I&apos;m actually up to right now — because a
+        A living note of what I&apos;m actually up to right now, because a
         portfolio shouldn&apos;t be a museum.
       </p>
       <div className="grid gap-5 sm:grid-cols-2">
@@ -320,7 +320,7 @@ export function Contact() {
           </h3>
           <p className="mt-2 max-w-md text-sm leading-relaxed text-muted">
             Open to software engineering &amp; AI roles. The fastest way to
-            reach me is email — or grab my résumé below.
+            reach me is email, or grab my résumé below.
           </p>
           <div className="mt-6 grid gap-3 sm:grid-cols-2">
             <CopyEmailCard email={profile.email} />
