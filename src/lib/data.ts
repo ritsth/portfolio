@@ -85,6 +85,24 @@ export const experience: Experience[] = [
   },
 ];
 
+export type Reference = {
+  name: string;
+  title: string;
+  org: string;
+  email: string;
+  phone: string;
+};
+
+export const references: Reference[] = [
+  {
+    name: "Jonathan Stevens",
+    title: "Enterprise Solutions Architect",
+    org: "Information Technology Services, Denison University",
+    email: "stevensj@denison.edu",
+    phone: "740-587-5799",
+  },
+];
+
 export type ProjectIcon =
   | "briefcase"
   | "flavor"

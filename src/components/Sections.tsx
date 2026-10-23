@@ -6,6 +6,7 @@ import {
   honors,
   now,
   journey,
+  references,
 } from "@/lib/data";
 import { ArrowIcon, FileIcon, GitHubIcon, LinkedInIcon } from "./Icons";
 import { TechIcon } from "@/lib/techIcons";
@@ -141,6 +142,35 @@ export function Experience() {
           </Reveal>
         ))}
       </ol>
+      <Reveal>
+        <h3 className="font-hand mb-4 mt-10 text-xl text-accent">reference</h3>
+        <ul className="grid gap-3 sm:grid-cols-2">
+          {references.map((r) => (
+            <li
+              key={r.name}
+              className="wobbly flex flex-col gap-1 border border-border bg-card p-4"
+            >
+              <span className="font-semibold text-foreground">{r.name}</span>
+              <span className="text-xs text-accent">{r.title}</span>
+              <span className="text-xs text-muted">{r.org}</span>
+              <span className="mt-2 flex flex-col gap-0.5 text-xs">
+                <a
+                  href={`mailto:${r.email}`}
+                  className="text-muted hover:text-accent"
+                >
+                  {r.email}
+                </a>
+                <a
+                  href={`tel:${r.phone.replace(/-/g, "")}`}
+                  className="text-muted hover:text-accent"
+                >
+                  {r.phone}
+                </a>
+              </span>
+            </li>
+          ))}
+        </ul>
+      </Reveal>
       <div className="mt-8">
         <a
           href={profile.resume}
