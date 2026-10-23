@@ -802,7 +802,7 @@ export const skills: { group: string; items: string[] }[] = [
   },
   {
     group: "AI / ML",
-    items: ["TensorFlow", "RAG", "RoBERTa", "Ollama", "LLMs"],
+    items: ["Claude API", "Claude Code", "TensorFlow", "RAG", "RoBERTa", "Ollama", "LLMs"],
   },
   {
     group: "Automation",

@@ -3,6 +3,13 @@
 // e.g. Next.js, Kafka, Django). Tech with no brand logo (gRPC, RAG, RoBERTa,
 // Ollama, LLMs...) gets a hand-drawn icon that reflects what it does.
 
+import {
+  siAirtable,
+  siClaude,
+  siClaudecode,
+  siMake,
+} from "simple-icons";
+
 type IconMeta = { cls: string; colored?: boolean };
 
 const DEVICON: Record<string, IconMeta> = {
@@ -31,6 +38,39 @@ const DEVICON: Record<string, IconMeta> = {
   drupal: { cls: "devicon-drupal-plain", colored: true },
   mongodb: { cls: "devicon-mongodb-plain", colored: true },
 };
+
+// Official brand marks from simple-icons, filled with the brand color.
+const BRAND: Record<string, { path: string; hex: string }> = {
+  airtable: siAirtable,
+  make: siMake,
+  "claude api": siClaude,
+  "claude code": siClaudecode,
+};
+
+// Jotform isn't in simple-icons; this is the official pen mark (from the
+// Jotform logo), with the dark corner following the text color for dark mode.
+function JotformMark({ className }: { className: string }) {
+  return (
+    <svg viewBox="0 0 60 66" className={className} aria-hidden>
+      <path
+        fill="currentColor"
+        d="M16.43 62.73c1.24 1.2.36 3.27-1.4 3.27H3.95A3.9 3.9 0 010 62.16V51.44c0-1.72 2.13-2.57 3.38-1.36l13.05 12.65z"
+      />
+      <path
+        fill="#FFB629"
+        d="M33.72 63.56a8.3 8.3 0 010-11.78l11.82-11.74a8.42 8.42 0 0111.86 0 8.3 8.3 0 010 11.78L45.58 63.56a8.42 8.42 0 01-11.86 0z"
+      />
+      <path
+        fill="#09F"
+        d="M2.5 34.05a8.3 8.3 0 010-11.78L22.39 2.5a8.42 8.42 0 0111.86 0 8.3 8.3 0 010 11.78l-19.9 19.77a8.42 8.42 0 01-11.85 0z"
+      />
+      <path
+        fill="#FF6100"
+        d="M18.76 48.15a8.3 8.3 0 010-11.78l26.87-26.7a8.42 8.42 0 0111.86 0 8.3 8.3 0 010 11.78l-26.87 26.7a8.42 8.42 0 01-11.86 0z"
+      />
+    </svg>
+  );
+}
 
 const svg = (className: string, children: React.ReactNode) => (
   <svg
@@ -150,36 +190,6 @@ const SEMANTIC: Record<string, (c: string) => React.ReactNode> = {
         <path d="M2 15h4M10 8h4M18 17h4" />
       </>
     ),
-  // Airtable — a spreadsheet-style database of linked records
-  airtable: (c) =>
-    svg(
-      c,
-      <>
-        <rect x="3" y="4" width="18" height="16" rx="2" />
-        <path d="M3 9.5h18M3 14.5h18M9 9.5V20" />
-      </>
-    ),
-  // Make — modules wired into an automated scenario
-  make: (c) =>
-    svg(
-      c,
-      <>
-        <circle cx="5" cy="12" r="2.5" />
-        <circle cx="19" cy="6" r="2.5" />
-        <circle cx="19" cy="18" r="2.5" />
-        <path d="M7.4 11 16.6 7M7.4 13 16.6 17" />
-      </>
-    ),
-  // Jotform — a fillable form
-  jotform: (c) =>
-    svg(
-      c,
-      <>
-        <rect x="4" y="3" width="16" height="18" rx="2" />
-        <path d="M8 8h8M8 12h8" />
-        <rect x="8" y="15.5" width="5" height="2.5" rx="1" />
-      </>
-    ),
   // Logistic Regression — an S-curve fit
   "logistic regression": (c) =>
     svg(
@@ -218,6 +228,20 @@ export function TechIcon({
       />
     );
   }
+  const brand = BRAND[key];
+  if (brand) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        fill={`#${brand.hex}`}
+        className="h-7 w-7"
+        aria-hidden
+      >
+        <path d={brand.path} />
+      </svg>
+    );
+  }
+  if (key === "jotform") return <JotformMark className="h-7 w-7" />;
   const semantic = SEMANTIC[key];
   if (semantic) return <>{semantic("h-7 w-7")}</>;
   return <GenericIcon className="h-7 w-7" />;
