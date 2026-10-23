@@ -123,7 +123,8 @@ export type ProjectIcon =
   | "robot"
   | "cart"
   | "puzzle"
-  | "chat";
+  | "chat"
+  | "workflow";
 
 export type ProjectMedia = {
   src: string;
@@ -158,6 +159,69 @@ export type Project = {
 };
 
 export const projects: Project[] = [
+  {
+    name: "ZCurtains AI Lead System",
+    blurb:
+      "A freelance AI automation for a custom-window-treatment business: a web form becomes a structured customer record, an AI-written brief, and a recommended next action, with a person approving every customer email.",
+    tags: ["Claude API", "Make", "Airtable", "Jotform", "Python"],
+    links: [],
+    featured: true,
+    theme: {
+      gradient: "from-rose-500 via-pink-700 to-slate-900",
+      icon: "workflow",
+      image: "/projects/zcurtains-flow.svg",
+    },
+    timeline: "Sep 2026 - Present",
+    role: "Freelance AI automation developer · requirements to go-live",
+    problem:
+      "Leads reached ZCurtains by hand: someone copied each inquiry into a spreadsheet, wrote a welcome email, waited on a questionnaire, then read free-text answers to decide what to do next. It was slow, easy to drop, and the follow-ups depended on someone remembering.",
+    overview:
+      "I scoped, built, tested, and handed off an AI-assisted lead workflow that connects five tools (Jotform, Make, Airtable, OneDrive, and the Claude API) through webhooks. A new lead gets a drafted welcome email; once the questionnaire comes back, the answers and photos are filed against the right project, the AI turns the free text into structured fields, and the team gets a short brief with a recommended next action. Phase 2 extends the same record through follow-ups, requests for more information, and the rough estimate email.",
+    highlights: [
+      "Used the Claude API to extract structured fields from free-text answers against a JSON schema, listing known and missing information separately so the model never invents a budget, measurement, or timeline",
+      "Put 4 deterministic rules in front of the AI, then let an agent choose from 9 next actions, so the predictable cases stay predictable and judgment is only used where it is needed",
+      "Kept a person in the loop: nothing reaches a customer until someone reads the draft and clicks send, apart from one agreed automatic follow-up",
+      "Built Phase 2 follow-ups with 24 and 48 hour timers checked each morning, a Next Step dropdown for replies, and a rough-estimate email where the team enters the numbers and the AI never sets a price",
+      "Wrote a Python test harness on 25+ payloads, including prompt-injection attempts, which caught 4 bugs that looked like success",
+      "Handed off with an activity log, a plain-language user guide, and docs so the team can run it without me",
+    ],
+    stack: [
+      "Claude API",
+      "Make",
+      "Airtable",
+      "Jotform",
+      "OneDrive",
+      "Webhooks",
+      "JSON Schema",
+      "Python",
+    ],
+    impact: [
+      { value: "5", label: "tools connected by webhooks" },
+      { value: "9", label: "possible next actions, 4 rules first" },
+      { value: "25+", label: "test payloads, incl. prompt injection" },
+    ],
+    gallery: [
+      {
+        src: "/projects/zcurtains-flow.svg",
+        alt: "Hand-drawn sketch: Jotform to Make to Airtable and OneDrive, then Claude API extraction, four rules, an AI agent choosing one of nine next actions, and a person approving",
+        caption: "From a web form to a ready-to-call brief.",
+        kind: "diagram",
+      },
+      {
+        src: "/projects/zcurtains-followup.svg",
+        alt: "Hand-drawn sketch of the follow-up timers, the three Next Step choices, and the rough estimate email",
+        caption: "Phase 2: follow-ups, Next Steps, and the rough estimate.",
+        kind: "diagram",
+      },
+    ],
+    originStory:
+      "a small business was drowning in copy-paste lead intake. I wanted to show AI can take the busywork without ever taking the final say.",
+    lessons: {
+      mistake:
+        "Early runs reported success while quietly doing the wrong thing, such as a field left empty that the next step treated as valid. Reading the logs showed green, so I almost trusted it.",
+      fix: "I wrote a test harness with 25+ payloads, including malicious ones, and asserted on outcomes instead of status codes. It caught 4 bugs that looked like success. I now test the failure paths first and make the system stop and flag a person rather than guess.",
+    },
+  },
   {
     name: "TransCore AI Support Chatbot",
     blurb:
@@ -686,11 +750,11 @@ export const honors: Honor[] = [
 
 // The "Now" section: what I'm currently up to. Update occasionally.
 export const now = {
-  updated: "July 2026",
+  updated: "October 2026",
   items: [
     {
       label: "building",
-      text: "iterating on Little AI Helper, with smarter autofill and better cover letters, based on real user feedback from the Chrome Web Store",
+      text: "Phase 2 of an AI lead system for ZCurtains, plus Little AI Helper updates based on real feedback from the Chrome Web Store",
     },
     {
       label: "learning",
