@@ -71,6 +71,15 @@ function PosterIcon({ icon, className }: { icon: ProjectIcon; className?: string
           <path d="M9 3a2 2 0 0 1 4 0c0 .5-.2 1-.5 1.4.3.3.5.7.5 1.1h3.5a1 1 0 0 1 1 1V10c.4 0 .8-.2 1.1-.5.4-.3.9-.5 1.4-.5a2 2 0 0 1 0 4c-.5 0-1-.2-1.4-.5-.3-.3-.7-.5-1.1-.5v3.5a1 1 0 0 1-1 1H13c0 .4.2.8.5 1.1.3.4.5.9.5 1.4a2 2 0 0 1-4 0c0-.5.2-1 .5-1.4.3-.3.5-.7.5-1.1H7.5a1 1 0 0 1-1-1V13c-.4 0-.8.2-1.1.5-.4.3-.9.5-1.4.5a2 2 0 0 1 0-4c.5 0 1 .2 1.4.5.3.3.7.5 1.1.5V7.5a1 1 0 0 1 1-1H9c0-.4-.2-.8-.5-1.1C8.2 5 8 4.5 8 4" />
         </svg>
       );
+    case "workflow": // ZCurtains — automation flow
+      return (
+        <svg {...common}>
+          <rect x="2" y="4" width="6" height="5" rx="1" />
+          <rect x="16" y="4" width="6" height="5" rx="1" />
+          <rect x="9" y="15" width="6" height="5" rx="1" />
+          <path d="M8 6.5h8M5 9v3.5a2 2 0 0 0 2 2h2M19 9v3.5a2 2 0 0 1-2 2h-2" />
+        </svg>
+      );
     case "chat": // TransCore chatbot — support conversations
       return (
         <svg {...common}>

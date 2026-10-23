@@ -1,0 +1,66 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="'Segoe Print','Bradley Hand','Comic Sans MS',cursive">
+  <title>Hand-drawn sketch of the ZCurtains follow-up and estimate flow</title>
+  <rect width="800" height="500" fill="#faf6ee"/>
+  <g stroke="#2b2620" stroke-opacity="0.05" stroke-width="1">
+    <line x1="0" y1="60" x2="800" y2="60"/><line x1="0" y1="120" x2="800" y2="120"/>
+    <line x1="0" y1="180" x2="800" y2="180"/><line x1="0" y1="240" x2="800" y2="240"/>
+    <line x1="0" y1="300" x2="800" y2="300"/><line x1="0" y1="360" x2="800" y2="360"/>
+    <line x1="0" y1="420" x2="800" y2="420"/><line x1="0" y1="480" x2="800" y2="480"/>
+  </g>
+  <text x="30" y="42" font-size="24" fill="#b0552a" transform="rotate(-1.5 30 42)">what happens after the welcome email ↴</text>
+
+  <!-- no reply lane -->
+  <text x="40" y="92" font-size="15" fill="#6b6152">no reply</text>
+  <path d="M40,104 C100,100 150,102 172,106 C176,126 176,146 172,162 C130,168 80,168 42,162 C36,142 36,124 40,104 Z" fill="#fffdf8" stroke="#2b2620" stroke-width="2.2" stroke-linejoin="round"/>
+  <text x="56" y="130" font-size="17" fill="#2b2620">welcome sent</text>
+  <text x="56" y="150" font-size="13" fill="#6b6152">timer starts</text>
+  <path d="M184,134 C204,128 220,132 238,134" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 6"/>
+  <path d="M230,128 L240,134 L229,140" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="190" y="120" font-size="14" fill="#b0552a">24h</text>
+  <path d="M250,104 C320,100 380,102 402,106 C406,126 406,146 402,162 C350,168 290,168 252,162 C246,142 246,124 250,104 Z" fill="#fffdf8" stroke="#2b2620" stroke-width="2.2" stroke-linejoin="round"/>
+  <text x="266" y="130" font-size="17" fill="#2b2620">auto follow-up</text>
+  <text x="266" y="150" font-size="13" fill="#6b6152">the one that auto-sends</text>
+  <path d="M414,134 C434,128 450,132 468,134" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 6"/>
+  <path d="M460,128 L470,134 L459,140" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <text x="420" y="120" font-size="14" fill="#b0552a">24h</text>
+  <g transform="rotate(2 560 134)">
+    <rect x="480" y="92" width="170" height="86" fill="#fff4a3"/>
+    <text x="494" y="120" font-size="15" fill="#57503a">reminder: call</text>
+    <text x="494" y="140" font-size="15" fill="#57503a">the customer</text>
+    <text x="494" y="160" font-size="13" fill="#57503a">(checked each morning)</text>
+  </g>
+
+  <!-- replies lane -->
+  <text x="40" y="226" font-size="15" fill="#6b6152">customer replies</text>
+  <path d="M40,238 C100,234 170,236 202,240 C206,262 206,282 202,298 C150,304 90,304 42,298 C36,278 36,258 40,238 Z" fill="#fffdf8" stroke="#2b2620" stroke-width="2.2" stroke-linejoin="round"/>
+  <text x="54" y="266" font-size="17" fill="#2b2620">a person reads it</text>
+  <text x="54" y="286" font-size="13" fill="#6b6152">picks a Next Step</text>
+
+  <path d="M214,258 C250,236 280,230 310,230" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 6"/>
+  <path d="M214,274 C250,290 280,300 310,300" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 6"/>
+  <path d="M214,266 C250,266 280,266 310,266" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 6"/>
+
+  <text x="322" y="236" font-size="16" fill="#2b2620">Response Complete</text>
+  <text x="322" y="256" font-size="12" fill="#6b6152">AI writes the brief from a pasted email</text>
+  <text x="322" y="282" font-size="16" fill="#2b2620">Need Questionnaire</text>
+  <text x="322" y="302" font-size="12" fill="#6b6152">approved draft, 24h reminder</text>
+  <text x="322" y="328" font-size="16" fill="#2b2620">Human Handling</text>
+  <text x="322" y="348" font-size="12" fill="#6b6152">all automatic emails stop</text>
+  <path d="M312,222 C308,262 308,310 312,356" fill="none" stroke="#2b2620" stroke-width="2" stroke-linecap="round"/>
+
+  <!-- estimate -->
+  <path d="M556,224 C620,220 700,222 756,226 C762,260 762,310 756,344 C700,350 620,350 558,344 C550,310 550,260 556,224 Z" fill="#fffdf8" stroke="#2b2620" stroke-width="2.2" stroke-linejoin="round"/>
+  <text x="574" y="254" font-size="17" fill="#2b2620">rough estimate email</text>
+  <text x="574" y="278" font-size="13" fill="#6b6152">you enter the numbers,</text>
+  <text x="574" y="296" font-size="13" fill="#6b6152">the AI never sets a price</text>
+  <text x="574" y="320" font-size="13" fill="#b0552a">review → send → 48h nudge</text>
+  <path d="M520,266 C534,260 544,264 552,266" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 6"/>
+  <path d="M544,260 L554,266 L543,272" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <!-- bottom banner -->
+  <g transform="rotate(-1 300 430)">
+    <rect x="60" y="392" width="560" height="62" fill="#fff4a3"/>
+    <text x="78" y="420" font-size="16" fill="#57503a">nothing reaches a customer until a person clicks Send Draft.</text>
+    <text x="78" y="442" font-size="14" fill="#57503a">a submitted questionnaire stops every timer on its own.</text>
+  </g>
+</svg>

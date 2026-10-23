@@ -1,0 +1,69 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" font-family="'Segoe Print','Bradley Hand','Comic Sans MS',cursive">
+  <title>Hand-drawn sketch of the ZCurtains AI lead intake workflow</title>
+  <rect width="800" height="500" fill="#faf6ee"/>
+  <g stroke="#2b2620" stroke-opacity="0.05" stroke-width="1">
+    <line x1="0" y1="60" x2="800" y2="60"/><line x1="0" y1="120" x2="800" y2="120"/>
+    <line x1="0" y1="180" x2="800" y2="180"/><line x1="0" y1="240" x2="800" y2="240"/>
+    <line x1="0" y1="300" x2="800" y2="300"/><line x1="0" y1="360" x2="800" y2="360"/>
+    <line x1="0" y1="420" x2="800" y2="420"/><line x1="0" y1="480" x2="800" y2="480"/>
+  </g>
+  <text x="30" y="42" font-size="24" fill="#b0552a" transform="rotate(-1.5 30 42)">from a web form to a ready-to-call brief ↴</text>
+
+  <!-- row 1 -->
+  <path d="M40,90 C100,86 150,88 172,92 C176,116 176,140 172,160 C130,166 80,166 42,160 C36,136 36,112 40,90 Z" fill="#fffdf8" stroke="#2b2620" stroke-width="2.2" stroke-linejoin="round"/>
+  <text x="62" y="120" font-size="18" fill="#2b2620">Jotform</text>
+  <text x="54" y="142" font-size="13" fill="#6b6152">customer fills it in</text>
+
+  <path d="M196,126 C212,120 226,124 240,126" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 6"/>
+  <path d="M232,120 L242,126 L231,132" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M250,90 C310,86 360,88 382,92 C386,116 386,140 382,160 C340,166 290,166 252,160 C246,136 246,112 250,90 Z" fill="#fffdf8" stroke="#2b2620" stroke-width="2.2" stroke-linejoin="round"/>
+  <text x="280" y="120" font-size="18" fill="#2b2620">Make</text>
+  <text x="262" y="142" font-size="13" fill="#6b6152">5 tools, 1 webhook</text>
+
+  <path d="M406,126 C422,120 436,124 450,126" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 6"/>
+  <path d="M442,120 L452,126 L441,132" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+
+  <path d="M460,90 C520,86 570,88 592,92 C596,116 596,140 592,160 C550,166 500,166 462,160 C456,136 456,112 460,90 Z" fill="#fffdf8" stroke="#2b2620" stroke-width="2.2" stroke-linejoin="round"/>
+  <text x="480" y="120" font-size="18" fill="#2b2620">Airtable</text>
+  <text x="474" y="142" font-size="13" fill="#6b6152">one record per project</text>
+
+  <!-- OneDrive off Make -->
+  <path d="M316,170 C318,196 316,214 318,232" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 6"/>
+  <path d="M311,224 L318,234 L325,223" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M236,236 C290,232 340,234 396,238 C400,258 400,276 396,292 C340,298 290,298 238,292 C232,274 232,254 236,236 Z" fill="#fffdf8" stroke="#2b2620" stroke-width="2.2" stroke-linejoin="round"/>
+  <text x="262" y="262" font-size="18" fill="#2b2620">OneDrive</text>
+  <text x="250" y="282" font-size="13" fill="#6b6152">form PDF + photos filed</text>
+
+  <!-- Claude API -->
+  <path d="M526,170 C528,196 526,214 528,232" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 6"/>
+  <path d="M521,224 L528,234 L535,223" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M440,236 C520,232 620,234 700,238 C706,258 706,278 700,296 C620,302 520,302 442,296 C434,276 434,254 440,236 Z" fill="#fffdf8" stroke="#2b2620" stroke-width="2.2" stroke-linejoin="round"/>
+  <text x="462" y="262" font-size="18" fill="#2b2620">Claude API</text>
+  <text x="462" y="284" font-size="13" fill="#6b6152">free text → JSON schema fields</text>
+  <text x="560" y="226" font-size="14" fill="#b0552a" transform="rotate(-2 560 226)">never invents data</text>
+
+  <!-- rules + agent row -->
+  <path d="M570,306 C572,326 570,342 572,356" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 6"/>
+  <path d="M565,348 L572,358 L579,347" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M440,362 C520,358 620,360 700,364 C706,386 706,408 700,426 C620,432 520,432 442,426 C434,404 434,382 440,362 Z" fill="#fffdf8" stroke="#2b2620" stroke-width="2.2" stroke-linejoin="round"/>
+  <text x="458" y="388" font-size="18" fill="#2b2620">4 rules, then AI agent</text>
+  <text x="458" y="410" font-size="13" fill="#6b6152">rules first, judgment second</text>
+
+  <path d="M430,396 C400,390 380,394 356,396" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-dasharray="2 6"/>
+  <path d="M365,390 L355,396 L366,402" fill="none" stroke="#8a7f6d" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M190,362 C250,358 310,360 346,364 C350,386 350,408 346,426 C300,432 240,432 192,426 C186,404 186,382 190,362 Z" fill="#fffdf8" stroke="#2b2620" stroke-width="2.2" stroke-linejoin="round"/>
+  <text x="206" y="388" font-size="16" fill="#2b2620">1 of 9 actions</text>
+  <text x="206" y="410" font-size="13" fill="#6b6152">+ a short internal brief</text>
+
+  <!-- human sticky -->
+  <g transform="rotate(-3 90 380)">
+    <rect x="28" y="336" width="124" height="104" fill="#fff4a3"/>
+    <text x="40" y="364" font-size="15" fill="#57503a">a person reads</text>
+    <text x="40" y="384" font-size="15" fill="#57503a">the brief and</text>
+    <text x="40" y="404" font-size="15" fill="#57503a">approves any</text>
+    <text x="40" y="424" font-size="15" fill="#57503a">customer email</text>
+  </g>
+  <path d="M184,396 C176,392 170,394 160,396" fill="none" stroke="#b0552a" stroke-width="2.2" stroke-linecap="round" stroke-dasharray="3 7"/>
+  <path d="M168,390 L159,396 L169,402" fill="none" stroke="#b0552a" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
