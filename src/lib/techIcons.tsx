@@ -150,6 +150,36 @@ const SEMANTIC: Record<string, (c: string) => React.ReactNode> = {
         <path d="M2 15h4M10 8h4M18 17h4" />
       </>
     ),
+  // Airtable — a spreadsheet-style database of linked records
+  airtable: (c) =>
+    svg(
+      c,
+      <>
+        <rect x="3" y="4" width="18" height="16" rx="2" />
+        <path d="M3 9.5h18M3 14.5h18M9 9.5V20" />
+      </>
+    ),
+  // Make — modules wired into an automated scenario
+  make: (c) =>
+    svg(
+      c,
+      <>
+        <circle cx="5" cy="12" r="2.5" />
+        <circle cx="19" cy="6" r="2.5" />
+        <circle cx="19" cy="18" r="2.5" />
+        <path d="M7.4 11 16.6 7M7.4 13 16.6 17" />
+      </>
+    ),
+  // Jotform — a fillable form
+  jotform: (c) =>
+    svg(
+      c,
+      <>
+        <rect x="4" y="3" width="16" height="18" rx="2" />
+        <path d="M8 8h8M8 12h8" />
+        <rect x="8" y="15.5" width="5" height="2.5" rx="1" />
+      </>
+    ),
   // Logistic Regression — an S-curve fit
   "logistic regression": (c) =>
     svg(
