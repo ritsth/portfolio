@@ -27,11 +27,23 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
+    role: "Freelance AI Automation Developer",
+    company: "ZCurtains",
+    period: "Sep 2026 - Present",
+    bullets: [
+      "Replaced a small business's manual lead intake with an AI workflow connecting 5 tools (Jotform, Make, Airtable, OneDrive, Claude API) through webhooks, owning it from requirements to go-live",
+      "Used the Claude API to extract structured fields from free-text forms against a JSON schema, then ran 4 rules before an AI agent picked from 9 next actions, with a person approving any customer email",
+      "Wrote a Python test harness on 25+ payloads, including prompt-injection cases, that caught 4 bugs that looked like success, and handed off with an activity log, user guide, and docs",
+    ],
+    tags: ["Claude API", "Make", "Airtable", "Webhooks", "Automation"],
+  },
+  {
     role: "Handshake AI Fellow",
     company: "Handshake",
-    period: "Apr 2026 - Present",
+    period: "Apr 2026 - Aug 2026",
     bullets: [
-      "Ship agentic coding projects end-to-end from natural-language specs, owning a 5-phase GitHub workflow to scope tasks, write evaluation rubrics, and benchmark 4 frontier models against them",
+      "Shipped coding projects end-to-end with AI coding agents (Claude Code, Codex), owning a 5-phase GitHub workflow that scoped each task, defined expected behavior, and benchmarked 4 frontier models",
+      "Wrote evaluation rubrics that turned vague requirements into checkable criteria, then reviewed model-generated code against them to find where AI coding tools succeed or fail",
     ],
     tags: ["AI", "LLMs", "Agentic Coding", "Evals", "GitHub"],
   },
@@ -686,7 +698,7 @@ export const now = {
     },
     {
       label: "working on",
-      text: "benchmarking AI models against engineered evaluation rubrics as a Handshake AI Fellow",
+      text: "testing AI automations against prompt-injection and edge cases before they ever touch a real customer",
     },
     {
       label: "looking for",

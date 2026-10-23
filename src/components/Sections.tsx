@@ -122,6 +122,14 @@ export function Experience() {
                     </li>
                   ))}
                 </ul>
+                {job.company === "ZCurtains" && (
+                  <HandLabel
+                    rotate={-1.5}
+                    className="mt-2 inline-block text-base"
+                  >
+                    ↑ full case study up in projects
+                  </HandLabel>
+                )}
                 {job.company === "TransCore" && (
                   <HandLabel
                     rotate={-1.5}
