@@ -151,7 +151,9 @@ export function Experience() {
         ))}
       </ol>
       <Reveal>
-        <h3 className="font-hand mb-4 mt-10 text-xl text-accent">reference</h3>
+        <h3 className="mb-4 mt-10 text-xl font-bold tracking-tight text-foreground">
+          Reference
+        </h3>
         <ul className="grid gap-3 sm:grid-cols-2">
           {references.map((r) => (
             <li

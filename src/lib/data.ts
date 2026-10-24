@@ -271,6 +271,82 @@ export const projects: Project[] = [
       "my first industry AI project, and the moment I realized shipping an LLM safely is a much harder (and more fun) problem than calling an API.",
   },
   {
+    name: "Little AI Helper",
+    blurb:
+      "A published Chrome extension that autofills job applications, generates tailored answers and cover letters from your resume, and flags visa-sponsorship requirements, powered by Gemini and a Cloud Run to Vertex AI proxy.",
+    tags: ["TypeScript", "React", "Vite", "Manifest V3", "Gemini", "Cloud Run"],
+    links: [
+      {
+        label: "Chrome Web Store",
+        href: "https://chromewebstore.google.com/detail/Little%20AI%20Helper/iibpijacaghdcckphindbaijjgcbaoll",
+      },
+      { label: "Repo", href: "https://github.com/ritsth/job-autofill-extension" },
+    ],
+    featured: true,
+    theme: {
+      gradient: "from-violet-500 via-purple-700 to-slate-900",
+      icon: "puzzle",
+      image: "/projects/little-ai-helper.png",
+    },
+    timeline: "Apr 2026 - Present (live on the Chrome Web Store)",
+    role: "Solo developer · published extension",
+    problem:
+      "Job seekers re-enter the same information across dozens of applications and agonize over open-ended questions and cover letters. It is a slow, repetitive grind, made worse when a role turns out to require visa sponsorship you don't have.",
+    overview:
+      "A published Chrome extension (Manifest V3) that autofills applications on Greenhouse, Lever, and Workday, drafts tailored answers and cover letters from your resume, and flags visa-sponsorship and eligibility requirements at a glance.",
+    highlights: [
+      "Built as a Manifest V3 extension with three moving parts: a React side panel for the UI, content scripts that scan the page DOM to find and fill form fields on Greenhouse, Lever, and Workday, and a background service worker",
+      "Routes every AI call through a Cloud Run proxy instead of calling Gemini from the client, so the API key never ships in extension code, and adds rate limiting and request validation on the way through",
+      "Generates downloadable cover letters from a reusable template that fills in company, role, and date placeholders per application",
+      "Scans every job page for visa-sponsorship, citizenship, and clearance language and surfaces a YES or NO eligibility badge before you spend time applying",
+      "Ships a pluggable AI layer: bring your own Gemini key, run an on-device model, or use the managed Cloud Run to Vertex AI proxy with Google sign-in and per-user daily quotas",
+      "Drafts tailored answers to open-ended questions by grounding Gemini in the resume you upload once, so responses match your actual experience",
+    ],
+    stack: [
+      "TypeScript",
+      "React",
+      "Vite",
+      "@crxjs/vite-plugin",
+      "Manifest V3",
+      "Gemini",
+      "Vertex AI",
+      "Cloud Run",
+      "Firestore",
+    ],
+    impact: [
+      { value: "Published", label: "on Chrome Web Store" },
+      { value: "3 boards", label: "Greenhouse · Lever · Workday" },
+    ],
+    gallery: [
+      {
+        src: "/projects/lah-panel.png",
+        alt: "Little AI Helper side panel open on a job posting",
+        caption: "Side panel: fill page, generate cover letter, tailored resume.",
+        kind: "screenshot",
+      },
+      {
+        src: "/projects/lah-autofill.png",
+        alt: "AI-drafted answers to open-ended application questions",
+        caption: "AI drafts answers to open-ended questions from your resume.",
+        kind: "screenshot",
+      },
+      {
+        src: "/projects/lah-badge.png",
+        alt: "Eligibility badge flagging visa-sponsorship on a job posting",
+        caption: "YES / NO eligibility badge on every job page.",
+        kind: "screenshot",
+      },
+      {
+        src: "/projects/lah-settings.png",
+        alt: "Little AI Helper settings and AI provider configuration",
+        caption: "Settings: pick your AI provider; data stays on device.",
+        kind: "screenshot",
+      },
+    ],
+    originStory:
+      "applying to jobs was eating my life. same fields, same questions, dozens of times a week. so I made the robot help me with it.",
+  },
+  {
     name: "Blueberry Mart",
     blurb:
       "The digital infrastructure for a multi-branch grocery mart launching in Nepal: a React Native customer app, a React back-office portal, and an event-driven .NET 8 backend on Cloud Run with Kafka streaming into BigQuery.",
@@ -371,82 +447,6 @@ export const projects: Project[] = [
         "The hardest part was not the code, it was the architecture calls with no obvious right answer. The simple path was to run analytics queries directly against PostgreSQL, but I worried heavy reports would compete with live shopping traffic and slow the app for customers.",
       fix: "I weighed that against the cost of standing up Kafka and BigQuery, did the pros and cons comparison, and decided the separation was worth it: transactional reads stay on Postgres, analytics runs on BigQuery fed by Kafka events. Making that complexity judgment alone is one reason I want senior engineers around to pressure-test decisions like it.",
     },
-  },
-  {
-    name: "Little AI Helper",
-    blurb:
-      "A published Chrome extension that autofills job applications, generates tailored answers and cover letters from your resume, and flags visa-sponsorship requirements, powered by Gemini and a Cloud Run to Vertex AI proxy.",
-    tags: ["TypeScript", "React", "Vite", "Manifest V3", "Gemini", "Cloud Run"],
-    links: [
-      {
-        label: "Chrome Web Store",
-        href: "https://chromewebstore.google.com/detail/Little%20AI%20Helper/iibpijacaghdcckphindbaijjgcbaoll",
-      },
-      { label: "Repo", href: "https://github.com/ritsth/job-autofill-extension" },
-    ],
-    featured: true,
-    theme: {
-      gradient: "from-violet-500 via-purple-700 to-slate-900",
-      icon: "puzzle",
-      image: "/projects/little-ai-helper.png",
-    },
-    timeline: "Apr 2026 - Present (live on the Chrome Web Store)",
-    role: "Solo developer · published extension",
-    problem:
-      "Job seekers re-enter the same information across dozens of applications and agonize over open-ended questions and cover letters. It is a slow, repetitive grind, made worse when a role turns out to require visa sponsorship you don't have.",
-    overview:
-      "A published Chrome extension (Manifest V3) that autofills applications on Greenhouse, Lever, and Workday, drafts tailored answers and cover letters from your resume, and flags visa-sponsorship and eligibility requirements at a glance.",
-    highlights: [
-      "Built as a Manifest V3 extension with three moving parts: a React side panel for the UI, content scripts that scan the page DOM to find and fill form fields on Greenhouse, Lever, and Workday, and a background service worker",
-      "Routes every AI call through a Cloud Run proxy instead of calling Gemini from the client, so the API key never ships in extension code, and adds rate limiting and request validation on the way through",
-      "Generates downloadable cover letters from a reusable template that fills in company, role, and date placeholders per application",
-      "Scans every job page for visa-sponsorship, citizenship, and clearance language and surfaces a YES or NO eligibility badge before you spend time applying",
-      "Ships a pluggable AI layer: bring your own Gemini key, run an on-device model, or use the managed Cloud Run to Vertex AI proxy with Google sign-in and per-user daily quotas",
-      "Drafts tailored answers to open-ended questions by grounding Gemini in the resume you upload once, so responses match your actual experience",
-    ],
-    stack: [
-      "TypeScript",
-      "React",
-      "Vite",
-      "@crxjs/vite-plugin",
-      "Manifest V3",
-      "Gemini",
-      "Vertex AI",
-      "Cloud Run",
-      "Firestore",
-    ],
-    impact: [
-      { value: "Published", label: "on Chrome Web Store" },
-      { value: "3 boards", label: "Greenhouse · Lever · Workday" },
-    ],
-    gallery: [
-      {
-        src: "/projects/lah-panel.png",
-        alt: "Little AI Helper side panel open on a job posting",
-        caption: "Side panel: fill page, generate cover letter, tailored resume.",
-        kind: "screenshot",
-      },
-      {
-        src: "/projects/lah-autofill.png",
-        alt: "AI-drafted answers to open-ended application questions",
-        caption: "AI drafts answers to open-ended questions from your resume.",
-        kind: "screenshot",
-      },
-      {
-        src: "/projects/lah-badge.png",
-        alt: "Eligibility badge flagging visa-sponsorship on a job posting",
-        caption: "YES / NO eligibility badge on every job page.",
-        kind: "screenshot",
-      },
-      {
-        src: "/projects/lah-settings.png",
-        alt: "Little AI Helper settings and AI provider configuration",
-        caption: "Settings: pick your AI provider; data stays on device.",
-        kind: "screenshot",
-      },
-    ],
-    originStory:
-      "applying to jobs was eating my life. same fields, same questions, dozens of times a week. so I made the robot help me with it.",
   },
   {
     name: "Jobbie",
