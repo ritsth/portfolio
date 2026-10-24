@@ -3,6 +3,13 @@
 // e.g. Next.js, Kafka, Django). Tech with no brand logo (gRPC, RAG, RoBERTa,
 // Ollama, LLMs...) gets a hand-drawn icon that reflects what it does.
 
+import {
+  siAirtable,
+  siClaude,
+  siClaudecode,
+  siMake,
+} from "simple-icons";
+
 type IconMeta = { cls: string; colored?: boolean };
 
 const DEVICON: Record<string, IconMeta> = {
@@ -31,6 +38,39 @@ const DEVICON: Record<string, IconMeta> = {
   drupal: { cls: "devicon-drupal-plain", colored: true },
   mongodb: { cls: "devicon-mongodb-plain", colored: true },
 };
+
+// Official brand marks from simple-icons, filled with the brand color.
+const BRAND: Record<string, { path: string; hex: string }> = {
+  airtable: siAirtable,
+  make: siMake,
+  "claude api": siClaude,
+  "claude code": siClaudecode,
+};
+
+// Jotform isn't in simple-icons; this is the official pen mark (from the
+// Jotform logo), with the dark corner following the text color for dark mode.
+function JotformMark({ className }: { className: string }) {
+  return (
+    <svg viewBox="0 0 60 66" className={className} aria-hidden>
+      <path
+        fill="currentColor"
+        d="M16.43 62.73c1.24 1.2.36 3.27-1.4 3.27H3.95A3.9 3.9 0 010 62.16V51.44c0-1.72 2.13-2.57 3.38-1.36l13.05 12.65z"
+      />
+      <path
+        fill="#FFB629"
+        d="M33.72 63.56a8.3 8.3 0 010-11.78l11.82-11.74a8.42 8.42 0 0111.86 0 8.3 8.3 0 010 11.78L45.58 63.56a8.42 8.42 0 01-11.86 0z"
+      />
+      <path
+        fill="#09F"
+        d="M2.5 34.05a8.3 8.3 0 010-11.78L22.39 2.5a8.42 8.42 0 0111.86 0 8.3 8.3 0 010 11.78l-19.9 19.77a8.42 8.42 0 01-11.85 0z"
+      />
+      <path
+        fill="#FF6100"
+        d="M18.76 48.15a8.3 8.3 0 010-11.78l26.87-26.7a8.42 8.42 0 0111.86 0 8.3 8.3 0 010 11.78l-26.87 26.7a8.42 8.42 0 01-11.86 0z"
+      />
+    </svg>
+  );
+}
 
 const svg = (className: string, children: React.ReactNode) => (
   <svg
@@ -188,6 +228,20 @@ export function TechIcon({
       />
     );
   }
+  const brand = BRAND[key];
+  if (brand) {
+    return (
+      <svg
+        viewBox="0 0 24 24"
+        fill={`#${brand.hex}`}
+        className="h-7 w-7"
+        aria-hidden
+      >
+        <path d={brand.path} />
+      </svg>
+    );
+  }
+  if (key === "jotform") return <JotformMark className="h-7 w-7" />;
   const semantic = SEMANTIC[key];
   if (semantic) return <>{semantic("h-7 w-7")}</>;
   return <GenericIcon className="h-7 w-7" />;
