@@ -38,6 +38,15 @@ export const experience: Experience[] = [
     tags: ["Claude API", "Make", "Airtable", "Webhooks", "Automation"],
   },
   {
+    role: "Part-Time Tutor",
+    company: "ClubZ! Tutoring Services",
+    period: "2026 - Present",
+    bullets: [
+      "Tutor students in computer science and mathematics, breaking down concepts and working through problems one-on-one",
+    ],
+    tags: ["Tutoring", "Computer Science", "Mathematics"],
+  },
+  {
     role: "Handshake AI Fellow",
     company: "Handshake",
     period: "Apr 2026 - Aug 2026",

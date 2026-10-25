@@ -21,9 +21,9 @@ function BouncyName({ name }: { name: string }) {
           <motion.span
             key={i}
             aria-hidden
-            className="inline-block cursor-default"
+            className="inline-block cursor-default transition-colors hover:text-accent"
             whileHover={
-              reduce ? undefined : { y: -12, rotate: -6, color: "var(--accent)" }
+              reduce ? undefined : { y: -12, rotate: -6 }
             }
             transition={{ type: "spring", stiffness: 500, damping: 12 }}
           >
