@@ -178,7 +178,7 @@ export const projects: Project[] = [
     theme: {
       gradient: "from-rose-500 via-pink-700 to-slate-900",
       icon: "workflow",
-      image: "/projects/zcurtains-flow.svg",
+      image: "/projects/zcurtains-cover.svg",
     },
     timeline: "Sep 2026 - Present",
     role: "Freelance AI automation developer · requirements to go-live",
@@ -210,6 +210,12 @@ export const projects: Project[] = [
       { value: "25+", label: "test payloads, incl. prompt injection" },
     ],
     gallery: [
+      {
+        src: "/projects/zcurtains-cover.svg",
+        alt: "Logos of the tools behind the system: Jotform, Make, Airtable, OneDrive, and the Claude API",
+        caption: "The five tools, wired together with webhooks.",
+        kind: "diagram",
+      },
       {
         src: "/projects/zcurtains-flow.svg",
         alt: "Hand-drawn sketch: Jotform to Make to Airtable and OneDrive, then Claude API extraction, four rules, an AI agent choosing one of nine next actions, and a person approving",

@@ -11,3 +11,4 @@ Project card imagery.
 - blueberry1/2/3.jpg — Ritika Shrestha's own screenshots of the Blueberry Mart app
 - style1/3/4/5/7/8.jpg — Unsplash (Unsplash License) — fashion photos
 - zcurtains-flow.svg / zcurtains-followup.svg — original hand-drawn style diagrams by Ritika Shrestha
+- zcurtains-cover.svg — original layout by Ritika Shrestha; logos are the property of Jotform, Make, Airtable, Microsoft, and Anthropic, shown for editorial/portfolio context only
