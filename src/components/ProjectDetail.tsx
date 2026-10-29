@@ -1,8 +1,9 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "motion/react";
-import type { Project } from "@/lib/data";
-import { ArrowIcon } from "./Icons";
+import type { Project, ProjectMedia } from "@/lib/data";
+import { ArrowIcon, ChevronIcon } from "./Icons";
 import { StickyNote } from "./Doodles";
 
 function CloseIcon({ className }: { className?: string }) {
@@ -21,6 +22,104 @@ function CloseIcon({ className }: { className?: string }) {
   );
 }
 
+function Lightbox({
+  items,
+  index,
+  onIndex,
+  onClose,
+}: {
+  items: ProjectMedia[];
+  index: number;
+  onIndex: (i: number) => void;
+  onClose: () => void;
+}) {
+  const m = items[index];
+  const multiple = items.length > 1;
+  const step = (d: number) => onIndex((index + d + items.length) % items.length);
+
+  useEffect(() => {
+    // Capture phase on window so Escape closes only the lightbox, not the
+    // case-study dialog's own document-level listener.
+    function onKey(e: KeyboardEvent) {
+      if (e.key === "Escape") {
+        e.stopPropagation();
+        onClose();
+      } else if (multiple && e.key === "ArrowRight") step(1);
+      else if (multiple && e.key === "ArrowLeft") step(-1);
+    }
+    window.addEventListener("keydown", onKey, true);
+    return () => window.removeEventListener("keydown", onKey, true);
+  });
+
+  const btn =
+    "absolute flex h-10 w-10 items-center justify-center rounded-full bg-white/15 text-white backdrop-blur-sm transition-colors hover:bg-white/30";
+
+  return (
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.15 }}
+      role="dialog"
+      aria-modal="true"
+      aria-label={`${m.alt}: enlarged`}
+      className="fixed inset-0 z-[60] flex flex-col items-center justify-center bg-black/85 p-4 backdrop-blur-sm sm:p-8"
+      onClick={onClose}
+    >
+      <button
+        onClick={onClose}
+        aria-label="Close image"
+        className={`${btn} right-4 top-4`}
+      >
+        <CloseIcon className="h-4 w-4" />
+      </button>
+      {multiple && (
+        <>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              step(-1);
+            }}
+            aria-label="Previous image"
+            className={`${btn} left-3 top-1/2 -translate-y-1/2 sm:left-6`}
+          >
+            <ChevronIcon className="h-4 w-4 rotate-180" />
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              step(1);
+            }}
+            aria-label="Next image"
+            className={`${btn} right-3 top-1/2 -translate-y-1/2 sm:right-6`}
+          >
+            <ChevronIcon className="h-4 w-4" />
+          </button>
+        </>
+      )}
+      {/* eslint-disable-next-line @next/next/no-img-element */}
+      <img
+        src={m.src}
+        alt={m.alt}
+        onClick={(e) => e.stopPropagation()}
+        className="max-h-[82vh] max-w-full rounded-lg bg-white object-contain shadow-2xl"
+      />
+      {(m.caption || multiple) && (
+        <p
+          onClick={(e) => e.stopPropagation()}
+          className="mt-3 max-w-2xl text-center text-sm text-white/85"
+        >
+          {m.caption}
+          {multiple && (
+            <span className="ml-2 font-mono text-xs text-white/60">
+              {index + 1} / {items.length}
+            </span>
+          )}
+        </p>
+      )}
+    </motion.div>
+  );
+}
+
 export default function ProjectDetail({
   project: p,
   onClose,
@@ -31,6 +130,7 @@ export default function ProjectDetail({
   reduce: boolean;
 }) {
   const gallery = p.gallery ?? [];
+  const [zoom, setZoom] = useState<number | null>(null);
   const hero = gallery[0]?.src ?? p.theme.image ?? p.theme.collage?.[0];
   // Images beyond the hero (hero already shows at the top of the panel).
   const extraGallery = gallery.slice(1);
@@ -83,9 +183,17 @@ export default function ProjectDetail({
             />
           )}
           <div
-            className={`absolute inset-0 bg-gradient-to-br ${p.theme.gradient} opacity-30 mix-blend-soft-light`}
+            className={`pointer-events-none absolute inset-0 bg-gradient-to-br ${p.theme.gradient} opacity-30 mix-blend-soft-light`}
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
+          {gallery.length > 0 && (
+            <button
+              type="button"
+              onClick={() => setZoom(0)}
+              aria-label="Enlarge cover image"
+              className="absolute inset-0 cursor-zoom-in"
+            />
+          )}
 
           <button
             onClick={onClose}
@@ -95,7 +203,7 @@ export default function ProjectDetail({
             <CloseIcon className="h-4 w-4" />
           </button>
 
-          <div className="absolute inset-x-0 bottom-0 p-5">
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 p-5">
             <div className="flex flex-wrap items-baseline gap-x-3 gap-y-1">
               <h2 className="text-2xl font-bold text-white drop-shadow">
                 {p.name}
@@ -151,18 +259,25 @@ export default function ProjectDetail({
                 Gallery
               </h3>
               <div className="-mx-1 flex snap-x gap-3 overflow-x-auto px-1 pb-2 [-ms-overflow-style:none] [scrollbar-width:none] [&::-webkit-scrollbar]:hidden">
-                {extraGallery.map((m) => (
+                {extraGallery.map((m, i) => (
                   <figure
                     key={m.src}
                     className="w-56 shrink-0 snap-start overflow-hidden rounded-xl border border-border"
                   >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={m.src}
-                      alt={m.alt}
-                      loading="lazy"
-                      className="h-36 w-full object-cover"
-                    />
+                    <button
+                      type="button"
+                      onClick={() => setZoom(i + 1)}
+                      aria-label={`Enlarge image: ${m.alt}`}
+                      className="block w-full cursor-zoom-in"
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={m.src}
+                        alt={m.alt}
+                        loading="lazy"
+                        className="h-36 w-full object-cover transition-opacity hover:opacity-90"
+                      />
+                    </button>
                     {m.caption && (
                       <figcaption className="px-3 py-2 text-[11px] leading-snug text-muted">
                         {m.caption}
@@ -268,6 +383,15 @@ export default function ProjectDetail({
           </section>
         </motion.div>
       </motion.div>
+
+      {zoom !== null && gallery[zoom] && (
+        <Lightbox
+          items={gallery}
+          index={zoom}
+          onIndex={setZoom}
+          onClose={() => setZoom(null)}
+        />
+      )}
     </div>
   );
 }
