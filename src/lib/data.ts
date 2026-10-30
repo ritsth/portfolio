@@ -329,7 +329,7 @@ export const projects: Project[] = [
       "Firestore",
     ],
     impact: [
-      { value: "Published", label: "on Chrome Web Store" },
+      { value: "30 users", label: "published on the Chrome Web Store" },
       { value: "3 boards", label: "Greenhouse · Lever · Workday" },
     ],
     gallery: [
