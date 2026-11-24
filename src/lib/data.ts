@@ -27,6 +27,15 @@ export type Experience = {
 
 export const experience: Experience[] = [
   {
+    role: "Associate Data Engineer",
+    company: "Aplos Data",
+    period: "Incoming",
+    bullets: [
+      "Building and testing Palantir components for client business solutions, following Aplos Data engineering standards",
+    ],
+    tags: ["Palantir", "Data Engineering"],
+  },
+  {
     role: "Freelance AI Automation Developer",
     company: "ZCurtains",
     period: "Sep 2026 - Present",
