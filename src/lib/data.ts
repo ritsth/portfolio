@@ -38,7 +38,7 @@ export const experience: Experience[] = [
   {
     role: "Freelance AI Automation Developer",
     company: "ZCurtains",
-    period: "Sep 2026 - Present",
+    period: "Sep 2026 - Nov 2026",
     bullets: [
       "Replaced a small business's manual lead intake with an AI workflow connecting 5 tools (Jotform, Make, Airtable, OneDrive, Claude API) through webhooks, owning it from requirements to go-live",
       "Used the Claude API to extract structured fields from free-text forms against a JSON schema, then ran 4 rules before an AI agent picked from 9 next actions, with a person approving any customer email",
